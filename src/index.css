@@ -1,4 +1,9 @@
 @tailwind base;
+* {
+  scrollbar-width: thin;
+  scrollbar-color: white transparent;
+}
+
 @tailwind components;
 @tailwind utilities;
 
