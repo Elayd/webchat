@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/axios";
-import { useAuthCheck } from "@/components/router/privateCheck/query";
+import { useAuthCheck } from "@/router/privateCheck/query";
 import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 

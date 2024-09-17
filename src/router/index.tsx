@@ -1,11 +1,12 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { Chat } from "../pages/chat/Chat";
-import { Settings } from "../pages/settings/Settings";
-import { AuthPage } from "../pages/auth/Auth";
-import { RegistrationPage } from "../pages/registration/RegistrationPage";
-import { PrivateRoute } from "./ProtectedRoute";
-import { OAuthPageCallback } from "../pages/oauthCallback/OAuthPageCallback";
+
 import { PublicRouteWrapper } from "./PublicRouteWrapper";
+import { AuthPage } from "@/components/pages/auth/Auth";
+import { Chat } from "@/components/pages/chat/Chat";
+import { OAuthPageCallback } from "@/components/pages/oauthCallback/OAuthPageCallback";
+import { RegistrationPage } from "@/components/pages/registration/RegistrationPage";
+import { Settings } from "lucide-react";
+import { PrivateRoute } from "./ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
