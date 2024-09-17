@@ -1,10 +1,16 @@
-import { createBrowserRouter } from "react-router-dom";
-import { Chat } from "../pages/Chat";
-import { Settings } from "../pages/Settings";
+import { createBrowserRouter, Navigate } from "react-router-dom";
+import { Chat } from "../pages/chat/Chat";
+import { Settings } from "../pages/settings/Settings";
+import { AuthPage } from "../pages/auth/Auth";
+import { RegistrationPage } from "../pages/registration/RegistrationPage";
+import { PrivateRoute } from "./ProtectedRoute";
+import { OAuthPageCallback } from "../pages/oauthCallback/OAuthPageCallback";
+import { PublicRouteWrapper } from "./PublicRouteWrapper";
+
 export const router = createBrowserRouter([
   {
     path: "/chat",
-    element: <Chat />,
+    element: <PrivateRoute element={<Chat />} />,
     children: [
       {
         path: ":id",
@@ -13,15 +19,25 @@ export const router = createBrowserRouter([
     ],
   },
   {
+    path: "/auth/callback",
+    element: <OAuthPageCallback />,
+  },
+  {
     path: "/settings",
-    element: <Settings />,
+    element: <PrivateRoute element={<Settings />} />,
   },
   {
-    path: "/registration",
-    element: <div>Registration</div>,
+    element: <PublicRouteWrapper />,
+    children: [
+      {
+        path: "/registration",
+        element: <RegistrationPage />,
+      },
+      {
+        path: "/auth",
+        element: <AuthPage />,
+      },
+    ],
   },
-  {
-    path: "/auth",
-    element: <div>Auth Page</div>,
-  },
+  { path: "*", element: <Navigate to="/" replace /> },
 ]);

@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
-import { UserField } from "../elements/UserField";
-import { Button } from "../shared/button";
+import { UserField } from "../../elements/UserField";
+import { Button } from "../../shared/button";
 import { Link } from "react-router-dom";
 
 export const Settings = () => {
