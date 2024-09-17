@@ -14,7 +14,7 @@ export const OAuthPageCallback = () => {
         try {
           if (called.current) return;
           called.current = true;
-          await axiosInstance.get(`/auth/token${window.location.search}`);
+          await axiosInstance.get(`/oauth/token${window.location.search}`);
           navigate("/chat");
         } catch (err) {
           console.error(err);
