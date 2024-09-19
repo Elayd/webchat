@@ -14,7 +14,6 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
       try {
         await refreshApi();
-
         return axiosInstance(originalRequest);
       } catch (refreshError) {
         return Promise.reject(refreshError);

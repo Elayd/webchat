@@ -11,7 +11,6 @@ export const Settings = () => {
 
   const saveChanges = () => {
     setEditable(false);
-    console.log("Fetch");
   };
 
   const handleInputRefCb = useCallback(

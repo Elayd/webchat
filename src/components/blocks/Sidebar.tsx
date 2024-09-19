@@ -119,6 +119,7 @@ const Sidebar = () => {
       {test.map((card) => {
         return (
           <ChatCard
+            key={card.chatId}
             chatId={card.chatId}
             imgSrc={card.imgSrc}
             headerText={card.headerText}

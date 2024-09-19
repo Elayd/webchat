@@ -1,8 +1,9 @@
 import { Outlet } from "react-router-dom";
-import Footer from "../../blocks/Footer";
+import Footer from "../../blocks/Footer/Footer";
 import Header from "../../blocks/Header";
 import Sidebar from "../../blocks/Sidebar";
 import "../../../App.css";
+
 export const Chat = () => {
   return (
     <div className="h-full w-full flex">

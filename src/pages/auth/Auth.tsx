@@ -5,7 +5,6 @@ import { useGoogleOAuth } from "./query/useGoogleOAuthMutation";
 
 export const AuthPage = () => {
   const emailRef = useRef<HTMLInputElement | null>(null);
-
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const { mutate: authUser } = useAuthMutation();
@@ -31,7 +30,6 @@ export const AuthPage = () => {
         <div className="w-3/6 h-80 flex items-center justify-center bg-gray-700 rounded-xl flex-col p-6">
           <form
             className="w-full h-full flex flex-col gap-2"
-            items-center
             onSubmit={handleSubmit}
           >
             <div className="flex flex-col h-14 w-full items-start pl-6 mb-4 pb-2 border-b border-solid border-gray-500">
