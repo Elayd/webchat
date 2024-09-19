@@ -1,6 +1,6 @@
 import { FormEvent, useRef } from "react";
-import { Button } from "../../shared/button";
 import { useRegMutation } from "./query/useRegMutation";
+import { Button } from "@/components/shared/button";
 
 export const RegistrationPage = () => {
   const emailRef = useRef<HTMLInputElement | null>(null);

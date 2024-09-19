@@ -1,8 +1,8 @@
+import Footer from "@/components/blocks/Footer/Footer";
+import Header from "@/components/blocks/Header";
+import Sidebar from "@/components/blocks/Sidebar";
+
 import { Outlet } from "react-router-dom";
-import Footer from "../../blocks/Footer/Footer";
-import Header from "../../blocks/Header";
-import Sidebar from "../../blocks/Sidebar";
-import "../../../App.css";
 
 export const Chat = () => {
   return (

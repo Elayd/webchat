@@ -5,7 +5,7 @@ import { AuthPage } from "@/pages/auth/Auth";
 import { Chat } from "@/pages/chat/Chat";
 import { OAuthPageCallback } from "@/pages/oauthCallback/OAuthPageCallback";
 import { RegistrationPage } from "@/pages/registration/RegistrationPage";
-import { Settings } from "lucide-react";
+import { Settings } from "@/pages/settings/Settings";
 
 export const router = createBrowserRouter([
   {

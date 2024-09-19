@@ -1,7 +1,7 @@
 import { FormEvent, useRef } from "react";
-import { Button } from "../../shared/button";
 import { useAuthMutation } from "./query/useAuthMutation";
 import { useGoogleOAuth } from "./query/useGoogleOAuthMutation";
+import { Button } from "@/components/shared/button";
 
 export const AuthPage = () => {
   const emailRef = useRef<HTMLInputElement | null>(null);
