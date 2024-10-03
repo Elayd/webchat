@@ -1,5 +1,7 @@
-import { axiosInstance } from "@/axios";
+import { privateInstance } from "@/axios";
 
-export const refreshApi = async () => {
-  return await axiosInstance.post("/security/refresh");
+export const refreshApi = async (refreshToken: string) => {
+  return await privateInstance.post<string>("/security/refresh", {
+    refreshToken,
+  });
 };

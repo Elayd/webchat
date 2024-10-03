@@ -2,6 +2,7 @@ import { FormEvent, useRef } from "react";
 import { useAuthMutation } from "./query/useAuthMutation";
 import { useGoogleOAuth } from "./query/useGoogleOAuthMutation";
 import { Button } from "@/components/shared/button";
+import { Link } from "react-router-dom";
 
 export const AuthPage = () => {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -65,6 +66,9 @@ export const AuthPage = () => {
             </Button>
           </form>
         </div>
+        <Link to="/registration" className="mt-5 ">
+          If you don't have an account, please sign up here
+        </Link>
       </div>
     </div>
   );
