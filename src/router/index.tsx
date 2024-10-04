@@ -1,15 +1,16 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
-import { AccessWrapper } from "./AccessWrapper";
+import { PrivateWrapper } from "./PrivateWrapper";
 import { AuthPage } from "@/pages/auth/Auth";
 import { Chat } from "@/pages/chat/Chat";
 import { OAuthPageCallback } from "@/pages/oauthCallback/OAuthPageCallback";
 import { RegistrationPage } from "@/pages/registration/RegistrationPage";
 import { Settings } from "@/pages/settings/Settings";
+import { PublicWrapper } from "./PublicWrapper";
 
 export const router = createBrowserRouter([
   {
-    element: <AccessWrapper isPrivate />,
+    element: <PrivateWrapper />,
     children: [
       {
         path: "/chat",
@@ -28,7 +29,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    element: <AccessWrapper />,
+    element: <PublicWrapper />,
     children: [
       {
         path: "/registration",
