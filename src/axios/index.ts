@@ -1,19 +1,13 @@
 import axios, { AxiosResponse } from "axios";
-import {} from "axios";
-import { refreshApi } from "./refresh";
 
 export const axiosInstance = axios.create({
   baseURL: "http://localhost:8000/api",
-});
-
-export const privateInstance = axios.create({
-  baseURL: "http://localhost:8000/api",
   headers: {
-    Authorization: `${localStorage.getItem("accessToken")}`,
+    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
   },
 });
 
-privateInstance.interceptors.response.use(
+axiosInstance.interceptors.response.use(
   (config: AxiosResponse) => {
     return config;
   },
@@ -26,15 +20,24 @@ privateInstance.interceptors.response.use(
     ) {
       originalRequest._isRetry = true;
       try {
-        const refreshToken = localStorage.getItem("refreshToken") ?? "";
-        const { data: newAccess } = await refreshApi(refreshToken);
-        localStorage.setItem("accessToken", newAccess);
-        originalRequest.headers["Authorization"] = newAccess;
-        return privateInstance.request(originalRequest);
-      } catch (error) {
-        console.log("Not authorized", error);
+        const refreshToken = localStorage.getItem("refreshToken");
+        if (refreshToken) {
+          const { data: newAccess } = await axiosInstance.post<string>(
+            "/security/refresh",
+            {
+              refreshToken,
+            }
+          );
+          localStorage.setItem("accessToken", newAccess);
+          originalRequest.headers["Authorization"] = `Bearer ${newAccess}`;
+          return axiosInstance.request(originalRequest);
+        } else {
+          throw Error("No refresh token");
+        }
+      } catch (refreshError) {
+        console.log(refreshError);
+        return Promise.reject(error);
       }
     }
-    throw error;
   }
 );

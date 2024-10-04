@@ -1,31 +1,14 @@
-import useAuthStore, {
-  setAuthSelector,
-  setIsLoadingCheckAuthSelector,
-} from "@/store/auth";
-import { useEffect } from "react";
-import { useAuthCheck } from "./privateCheck/query";
+import useAuthStore from "@/store/auth";
+import { ReactNode, useEffect } from "react";
 
-export default function AuthWrapper({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const setAuth = useAuthStore(setAuthSelector);
-  const setIsLoding = useAuthStore(setIsLoadingCheckAuthSelector);
-
-  const { isSuccess, isLoading } = useAuthCheck();
+export default function AuthWrapper({ children }: { children: ReactNode }) {
+  const { isLoading, checkAuth, isInit } = useAuthStore();
 
   useEffect(() => {
-    setIsLoding(isLoading);
-    if (!isLoading) {
-      if (isSuccess) {
-        setAuth(true);
-        setIsLoding(false);
-      } else {
-        setIsLoding(false);
-      }
-    }
-  }, [isLoading, isSuccess, setAuth, setIsLoding]);
+    checkAuth();
+  }, [checkAuth]);
 
-  return isLoading ? <div>Loading...</div> : children;
+  if (!isInit || isLoading) return <div>Loading...</div>;
+
+  return children;
 }

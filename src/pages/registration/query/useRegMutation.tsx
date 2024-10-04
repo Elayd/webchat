@@ -3,7 +3,6 @@ import { regApi } from "../api/api.ts";
 import { useNavigate } from "react-router-dom";
 import { IUserRegData } from "../types/types.ts";
 import useAuthStore, { setAuthSelector } from "@/store/auth.ts";
-import { handleAuthHandler } from "@/utils/handleAuthHandler.ts";
 
 export const useRegMutation = () => {
   const setAuth = useAuthStore(setAuthSelector);
@@ -11,7 +10,11 @@ export const useRegMutation = () => {
   return useMutation({
     mutationFn: (data: IUserRegData) => regApi(data).then((res) => res.data),
     onSuccess: (response) => {
-      handleAuthHandler(response, setAuth, navigate);
+      const { accessToken, refreshToken } = response;
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      setAuth(true);
+      navigate("/chat");
     },
   });
 };

@@ -2,7 +2,6 @@ import { axiosInstance } from "@/axios";
 import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthCheck } from "../AuthWrapper/privateCheck/query";
-import { handleAuthHandler } from "@/utils/handleAuthHandler";
 import useAuthStore, { setAuthSelector } from "@/store/auth";
 import { ITokenResponse } from "@/types";
 
@@ -22,7 +21,11 @@ export const OAuthPageCallback = () => {
             `/oauth/token${window.location.search}`
           );
           const tokens = response.data;
-          handleAuthHandler(tokens, setAuth, navigate);
+          const { accessToken, refreshToken } = tokens;
+          localStorage.setItem("accessToken", accessToken);
+          localStorage.setItem("refreshToken", refreshToken);
+          setAuth(true);
+          navigate("/chat");
         } catch (err) {
           console.error(err);
         }

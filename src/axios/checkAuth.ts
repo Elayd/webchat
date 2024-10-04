@@ -1,5 +1,5 @@
-import { privateInstance } from "@/axios";
+import { axiosInstance } from "@/axios";
 
 export const fetchAuthStatus = async () => {
-  return await privateInstance.post("/security/checkAuth");
+  return await axiosInstance.post("/security/checkAuth");
 };
