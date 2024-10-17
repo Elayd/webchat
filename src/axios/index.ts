@@ -32,7 +32,7 @@ axiosInstance.interceptors.response.use(
           originalRequest.headers["Authorization"] = `Bearer ${newAccess}`;
           return axiosInstance.request(originalRequest);
         } else {
-          throw Error("No refresh token");
+          throw Error(error);
         }
       } catch (refreshError) {
         console.log(refreshError);

@@ -1,14 +1,18 @@
-import useAuthStore from "@/store/auth";
+import useAuthStore, {
+  checkAuthSelector,
+  isLoadingCheckAuthSelector,
+} from "@/store/auth";
 import { ReactNode, useEffect } from "react";
 
 export default function AuthWrapper({ children }: { children: ReactNode }) {
-  const { isLoading, checkAuth, isInit } = useAuthStore();
+  const isLoading = useAuthStore(isLoadingCheckAuthSelector);
+  const checkAuth = useAuthStore(checkAuthSelector);
 
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
 
-  if (!isInit || isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading...</div>;
 
   return children;
 }
