@@ -1,7 +1,12 @@
 import { Button } from "@/components/shared/button";
-import { useLogoutMutation } from "./query/useLogoutMutation";
+import useAuthStore, { setAuthSelector } from "@/store/auth";
 
 export function LogoutButton() {
-  const { mutate: logout } = useLogoutMutation();
-  return <Button onClick={() => logout()}>Logout</Button>;
+  const setAuth = useAuthStore(setAuthSelector);
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    setAuth(false);
+  };
+  return <Button onClick={handleLogout}>Logout</Button>;
 }

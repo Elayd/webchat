@@ -1,8 +1,9 @@
 import { axiosInstance } from "@/axios";
-import { IUserData } from "../types/types";
+import { IUserAuthData } from "../types/types";
+import { ITokenResponse } from "@/types";
 
-export const authApi = async (data: IUserData) => {
-  return axiosInstance.post("security/auth", data);
+export const authApi = async (data: IUserAuthData) => {
+  return axiosInstance.post<ITokenResponse>("security/auth", data);
 };
 
 export const getGoogleOAuthUrl = async () => {

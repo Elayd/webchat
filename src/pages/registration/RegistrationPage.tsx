@@ -1,12 +1,13 @@
 import { FormEvent, useRef } from "react";
 import { useRegMutation } from "./query/useRegMutation";
 import { Button } from "@/components/shared/button";
+import { Link } from "react-router-dom";
 
 export const RegistrationPage = () => {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  const { mutate } = useRegMutation();
+  const { mutate: registration } = useRegMutation();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     const data = {
@@ -14,7 +15,7 @@ export const RegistrationPage = () => {
       password: passwordRef?.current?.value ?? "",
     };
     event.preventDefault();
-    mutate(data);
+    registration(data);
   };
 
   return (
@@ -49,6 +50,9 @@ export const RegistrationPage = () => {
             SUBMIT
           </Button>
         </form>
+        <Link to="/auth" className="mt-10 ">
+          If you have an account, please sign in here
+        </Link>
       </div>
     </div>
   );
