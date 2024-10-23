@@ -1,9 +1,12 @@
+import { handleServerError } from "@/utils/errorCodesHandler";
 import { useRegMutation } from "./query/useRegMutation";
 import { UserRegistrationSchema } from "./schema/schema";
 import { AuthForm } from "@/components/blocks/AuthForm.tsx/AuthForm";
 
 export const RegistrationPage = () => {
-  const { mutate: registration } = useRegMutation();
+  const { mutate: registration, error } = useRegMutation();
+
+  const errorMessage = error ? handleServerError(error) : "";
 
   const link = {
     to: "/auth",
@@ -16,6 +19,7 @@ export const RegistrationPage = () => {
       onSubmit={registration}
       validationSchema={UserRegistrationSchema}
       link={link}
+      errorMessage={errorMessage}
     />
   );
 };

@@ -17,6 +17,7 @@ interface AuthFormProps {
   validationSchema: z.ZodSchema<AuthSchema>;
   link: { to: string; text: string };
   showGoogleLogin?: boolean;
+  errorMessage?: string;
 }
 
 export const AuthForm: React.FC<AuthFormProps> = ({
@@ -25,6 +26,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
   validationSchema,
   link,
   showGoogleLogin,
+  errorMessage,
 }) => {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -88,6 +90,12 @@ export const AuthForm: React.FC<AuthFormProps> = ({
     <div className="h-full w-full bg-gray-800 flex justify-center items-center">
       <div className="w-2/6 border-2 border-solid border-gray-500 rounded-3xl flex flex-col p-6 bg-gray-700">
         <h1 className="text-gray-400 text-center mb-6">{title}</h1>
+
+        {/* Фиксированное место для сообщения об ошибке */}
+        <span className="text-red-500 mb-10 h-[20px]">
+          {errorMessage || " "}
+        </span>
+
         <form onSubmit={handleSubmit} className="flex flex-col">
           <InputField
             label="Email"
