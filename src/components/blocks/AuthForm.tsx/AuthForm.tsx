@@ -81,9 +81,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
   };
 
   const handleGoogleOAuth = useCallback(() => {
-    window.location.assign(
-      "https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&client_id=801555540524-pp7o09fa92uf4otba0ei7vp9ccpspsoe.apps.googleusercontent.com&prompt=consent&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2Fauth%2Fcallback&response_type=code&scope=openid%20profile%20email&state=standard_oauth"
-    );
+    window.location.assign(import.meta.env.VITE_GOOGLE_URL);
   }, []);
 
   return (
