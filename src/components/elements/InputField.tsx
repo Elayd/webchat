@@ -1,28 +1,37 @@
-import { forwardRef } from "react";
+import { memo } from "react";
+import {
+  FieldError,
+  UseFormRegister,
+  FieldValues,
+  Path,
+} from "react-hook-form";
 
-interface InputFieldProps {
+interface InputFieldProps<T extends FieldValues> {
+  name: Path<T>;
   label: string;
   type: string;
-  error?: string;
-  onBlur: () => void;
-  onFocus: () => void;
-  ref: React.Ref<HTMLInputElement>;
+  register: UseFormRegister<T>;
+  error: FieldError | undefined;
 }
 
-const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
-  ({ label, type, error, onBlur, onFocus }, ref) => (
-    <div className="flex flex-col mb-4">
-      <label className="text-white">{label}:</label>
-      <input
-        ref={ref}
-        type={type}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        className="bg-gray-600 text-blue-500 w-full border-none outline-none p-2 rounded"
-      />
-      <span className="text-red-500 mt-1 h-[20px]">{error}</span>
-    </div>
-  )
+const InputField = <T extends FieldValues>({
+  label,
+  type,
+  error,
+  register,
+  name,
+}: InputFieldProps<T>) => (
+  <div className="flex flex-col mb-4">
+    <label className="text-white">{label}:</label>
+    <input
+      type={type}
+      className="bg-gray-600 text-blue-500 w-full border-none outline-none p-2 rounded"
+      {...register(name)}
+    />
+    {error && (
+      <span className="text-red-500 mt-1 h-[20px]">{error.message}</span>
+    )}
+  </div>
 );
 
-export default InputField;
+export default memo(InputField) as typeof InputField;

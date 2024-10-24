@@ -1,19 +1,19 @@
-// AuthForm.tsx
-import { FormEvent, useCallback, useRef, useState } from "react";
+import { useCallback } from "react";
 import { Button } from "@/components/shared/button";
 import { Link } from "react-router-dom";
 import { z } from "zod";
-import { zodErrorsMapper } from "@/utils/zodErrorsMapper";
 import InputField from "@/components/elements/InputField";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-interface AuthSchema {
+export interface AuthSchema {
   email: string;
   password: string;
 }
 
 interface AuthFormProps {
   title: string;
-  onSubmit: (data: { email: string; password: string }) => void;
+  onSubmit: (data: AuthSchema) => void;
   validationSchema: z.ZodSchema<AuthSchema>;
   link: { to: string; text: string };
   showGoogleLogin?: boolean;
@@ -28,57 +28,14 @@ export const AuthForm: React.FC<AuthFormProps> = ({
   showGoogleLogin,
   errorMessage,
 }) => {
-  const emailRef = useRef<HTMLInputElement | null>(null);
-  const passwordRef = useRef<HTMLInputElement | null>(null);
-
-  const [validationErrors, setValidationErrors] = useState({
-    email: "",
-    password: "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AuthSchema>({
+    resolver: zodResolver(validationSchema),
+    mode: "onBlur",
   });
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const data = {
-      email: emailRef.current?.value ?? "",
-      password: passwordRef.current?.value ?? "",
-    };
-
-    try {
-      const validatedUserData = validationSchema.parse(data);
-      onSubmit(validatedUserData);
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        const errors = zodErrorsMapper<keyof AuthSchema>(
-          error.formErrors.fieldErrors
-        );
-        setValidationErrors(errors);
-      } else {
-        console.log("Unexpected error: ", error);
-      }
-    }
-  };
-  // мб разделить useState на два и мемоизировать handleBlur и handleFocus
-  const handleBlur = (field: keyof typeof validationErrors) => {
-    try {
-      const data = {
-        email: emailRef.current?.value ?? "",
-        password: passwordRef.current?.value ?? "",
-      };
-      if (validationSchema instanceof z.ZodObject) {
-        validationSchema.shape[field].parse(data[field]);
-        setValidationErrors((prev) => ({ ...prev, [field]: "" }));
-      }
-    } catch (error: unknown) {
-      if (error instanceof z.ZodError) {
-        const errorMessage = error.formErrors.formErrors[0];
-        setValidationErrors((prev) => ({ ...prev, [field]: errorMessage }));
-      }
-    }
-  };
-
-  const handleFocus = (field: keyof typeof validationErrors) => {
-    setValidationErrors((prev) => ({ ...prev, [field]: "" }));
-  };
 
   const handleGoogleOAuth = useCallback(() => {
     window.location.assign(import.meta.env.VITE_GOOGLE_URL);
@@ -88,28 +45,25 @@ export const AuthForm: React.FC<AuthFormProps> = ({
     <div className="h-full w-full bg-gray-800 flex justify-center items-center">
       <div className="w-2/6 border-2 border-solid border-gray-500 rounded-3xl flex flex-col p-6 bg-gray-700">
         <h1 className="text-gray-400 text-center mb-6">{title}</h1>
-
-        {/* Фиксированное место для сообщения об ошибке */}
-        <span className="text-red-500 mb-10 h-[20px]">
-          {errorMessage || " "}
-        </span>
-
-        <form onSubmit={handleSubmit} className="flex flex-col">
+        {errorMessage && (
+          <span className="text-red-500 mb-10 h-[20px] text-center">
+            {errorMessage}
+          </span>
+        )}
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
           <InputField
             label="Email"
             type="text"
-            ref={emailRef}
-            onBlur={() => handleBlur("email")}
-            onFocus={() => handleFocus("email")}
-            error={validationErrors.email}
+            name="email"
+            error={errors.email}
+            register={register}
           />
           <InputField
             label="Password"
             type="password"
-            ref={passwordRef}
-            onBlur={() => handleBlur("password")}
-            onFocus={() => handleFocus("password")}
-            error={validationErrors.password}
+            name="password"
+            error={errors.password}
+            register={register}
           />
           <Button
             size="lg"
