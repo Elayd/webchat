@@ -13,31 +13,35 @@ axiosInstance.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
+
     if (
-      error.response.status === 401 &&
-      error.config &&
-      !error.config?._isRetry
+      error.response.status !== 401 ||
+      !error.config ||
+      error.config._isRetry
     ) {
-      originalRequest._isRetry = true;
-      try {
-        const refreshToken = localStorage.getItem("refreshToken");
-        if (refreshToken) {
-          const { data: newAccess } = await axiosInstance.post<string>(
-            "/security/refresh",
-            {
-              refreshToken,
-            }
-          );
-          localStorage.setItem("accessToken", newAccess);
-          originalRequest.headers["Authorization"] = `Bearer ${newAccess}`;
-          return axiosInstance.request(originalRequest);
-        } else {
-          throw Error(error);
+      return Promise.reject(error);
+    }
+
+    originalRequest._isRetry = true;
+
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (refreshToken) {
+      return Promise.reject(refreshToken);
+    }
+
+    try {
+      const { data: newAccess } = await axiosInstance.post<string>(
+        "/security/refresh",
+        {
+          refreshToken,
         }
-      } catch (refreshError) {
-        console.log(refreshError);
-        return Promise.reject(error);
-      }
+      );
+      localStorage.setItem("accessToken", newAccess);
+      originalRequest.headers["Authorization"] = `Bearer ${newAccess}`;
+      return axiosInstance.request(originalRequest);
+    } catch (refreshError) {
+      console.log(refreshError);
+      return Promise.reject(error);
     }
   }
 );
