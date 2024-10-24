@@ -1,1 +1,3 @@
-export { Settings } from "./ui/Settings";
+import { SettingsPageAsync } from "./ui/SettingsPage.async";
+
+export { SettingsPageAsync as SettingsPage };

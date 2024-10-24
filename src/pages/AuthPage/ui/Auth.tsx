@@ -3,7 +3,7 @@ import { AuthForm } from "@/widgets/AuthForm";
 import { useAuthMutation } from "../model/query/useAuthMutation";
 import { UserAuthSchema } from "../model/schema/auth";
 
-export const AuthPage = () => {
+const AuthPage = () => {
   const { mutate: authUser, error } = useAuthMutation();
 
   const errorMessage = error ? handleServerError(error) : "";
@@ -24,3 +24,5 @@ export const AuthPage = () => {
     />
   );
 };
+
+export default AuthPage;

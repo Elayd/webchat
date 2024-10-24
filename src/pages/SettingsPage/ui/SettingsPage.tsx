@@ -5,7 +5,7 @@ import { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 
 // МБ распилю потом, щас рано на слои
-export const Settings = () => {
+const SettingsPage = () => {
   const [editable, setEditable] = useState(false);
   const changeMode = () => {
     setEditable(true);
@@ -59,3 +59,5 @@ export const Settings = () => {
     </div>
   );
 };
+
+export default SettingsPage;

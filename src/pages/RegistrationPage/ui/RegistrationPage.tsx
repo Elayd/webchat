@@ -4,7 +4,7 @@ import { AuthForm } from "@/widgets/AuthForm";
 import { useRegMutation } from "../model/query/useRegMutation";
 import { UserRegistrationSchema } from "../model/schema/schema";
 
-export const RegistrationPage = () => {
+const RegistrationPage = () => {
   const { mutate: registration, error } = useRegMutation();
 
   const errorMessage = error ? handleServerError(error) : "";
@@ -24,3 +24,5 @@ export const RegistrationPage = () => {
     />
   );
 };
+
+export default RegistrationPage;

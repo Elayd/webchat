@@ -7,7 +7,7 @@ import useAuthStore, {
 } from "@/app/store/AuthSlice/auth";
 import { ITokenResponse } from "@/shared/types/tokens";
 
-export const OAuthPageCallback = () => {
+const OAuthPageCallback = () => {
   const navigate = useNavigate();
   const setAuth = useAuthStore(setAuthSelector);
   const isAuth = useAuthStore(isAuthSelector);
@@ -34,3 +34,5 @@ export const OAuthPageCallback = () => {
   }, [isAuth, navigate, setAuth]);
   return <></>;
 };
+
+export default OAuthPageCallback;

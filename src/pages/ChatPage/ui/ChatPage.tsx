@@ -3,7 +3,7 @@ import { Header } from "@/widgets/Header";
 import { Sidebar } from "@/widgets/Sidebar";
 import { Outlet } from "react-router-dom";
 
-export const Chat = () => {
+const Chat = () => {
   return (
     <div className="h-full w-full flex">
       <div className="h-full w-4/12 md:w-4/12 lg:w-3/12 xl:w-2/12 dark bg-gray-800 border-l border-solid border-gray-500">
@@ -17,3 +17,5 @@ export const Chat = () => {
     </div>
   );
 };
+
+export default Chat;
