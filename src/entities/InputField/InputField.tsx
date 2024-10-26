@@ -1,3 +1,4 @@
+import { Input } from "@/shared/ui/Input/Input";
 import { memo } from "react";
 import {
   FieldError,
@@ -23,7 +24,7 @@ const InputField = <T extends FieldValues>({
 }: InputFieldProps<T>) => (
   <div className="flex flex-col mb-4">
     <label className="text-white">{label}:</label>
-    <input
+    <Input
       type={type}
       className="bg-gray-600 text-blue-500 w-full border-none outline-none p-2 rounded-xl"
       {...register(name)}

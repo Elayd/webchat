@@ -29,6 +29,7 @@ export default tseslint.config(
       "@tanstack/query/no-rest-destructuring": "warn",
       "@tanstack/query/stable-query-client": "error",
       "react-refresh/only-export-components": "off",
+      "@typescript-eslint/no-empty-object-type": "off",
     },
   }
 );

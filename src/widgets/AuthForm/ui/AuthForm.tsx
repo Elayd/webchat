@@ -1,7 +1,7 @@
 import { Button } from "@/shared/ui/Button/Button";
 import { Link } from "react-router-dom";
 import { z } from "zod";
-import InputField from "@/shared/ui/InputField/InputField";
+import InputField from "@/entities/InputField/InputField";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AuthData } from "../model";
