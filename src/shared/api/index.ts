@@ -25,8 +25,8 @@ axiosInstance.interceptors.response.use(
     originalRequest._isRetry = true;
 
     const refreshToken = localStorage.getItem("refreshToken");
-    if (refreshToken) {
-      return Promise.reject(refreshToken);
+    if (!refreshToken) {
+      return Promise.reject(error);
     }
 
     try {
