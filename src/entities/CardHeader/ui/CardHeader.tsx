@@ -6,9 +6,9 @@ interface CardHeaderProps {
 }
 export const CardHeader: FC<CardHeaderProps> = ({ headerText, day }) => {
   return (
-    <div className="h-1/4 text-white flex flex-row justify-between pr-1 pl-2 pt-1">
-      <h4>{headerText}</h4>
-      <span>{day}</span>
+    <div className="flex justify-between items-center">
+      <h4 className="text-white font-semibold">{headerText}</h4>
+      <span className="text-gray-400 text-sm">{day}</span>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { Button } from "@/shared/ui/Button/button";
+import { Button } from "@/shared/ui/Button/Button";
 import { useCallback } from "react";
 
 export function GoogleButton() {
@@ -10,7 +10,7 @@ export function GoogleButton() {
     <Button
       type="button"
       size="lg"
-      className="mt-4 bg-gray-800 border-b border-solid border-gray-500 w-full"
+      className="mt-4  w-full rounded-xl"
       onClick={handleGoogleOAuth}
     >
       LOGIN BY GOOGLE

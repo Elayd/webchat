@@ -1,4 +1,4 @@
-import { Button } from "@/shared/ui/Button/button";
+import { Button } from "@/shared/ui/Button/Button";
 import { Link } from "react-router-dom";
 import { z } from "zod";
 import InputField from "@/shared/ui/InputField/InputField";
@@ -35,7 +35,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
 
   return (
     <div className="h-full w-full bg-gray-800 flex justify-center items-center">
-      <div className="w-2/6 border-2 border-solid border-gray-500 rounded-3xl flex flex-col p-6 bg-gray-700">
+      <div className="w-2/6 border-2 min-w-[300px] border-solid border-gray-500 rounded-3xl flex flex-col p-6 bg-gray-700">
         <h1 className="text-gray-400 text-center mb-6">{title}</h1>
         {errorMessage && (
           <span className="text-red-500 mb-10 h-[20px] text-center">
@@ -57,11 +57,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
             error={errors.password}
             register={register}
           />
-          <Button
-            size="lg"
-            type="submit"
-            className="mt-4 bg-gray-800 border-b border-solid border-gray-500 w-full"
-          >
+          <Button size="lg" type="submit" className="mt-4 w-full rounded-xl">
             SUBMIT
           </Button>
           {showGoogleLogin && <GoogleButton />}

@@ -115,21 +115,19 @@ export const Sidebar = () => {
     },
   ];
   return (
-    <aside className="w-full h-[75%] max-h-[75%] overflow-auto border-r border-solid border-gray-500">
-      {test.map((card) => {
-        return (
-          <ChatCard
-            key={card.chatId}
-            chatId={card.chatId}
-            imgSrc={card.imgSrc}
-            headerText={card.headerText}
-            day={card.day}
-            lastMessage={card.lastMessage}
-            isSelected={card.chatId === selectedChatId}
-            onSelect={handleSelectChatId}
-          />
-        );
-      })}
+    <aside className="w-full h-[65%] md:h-[75%] overflow-auto border-r border-solid border-gray-500">
+      {test.map((card) => (
+        <ChatCard
+          key={card.chatId}
+          chatId={card.chatId}
+          imgSrc={card.imgSrc}
+          headerText={card.headerText}
+          day={card.day}
+          lastMessage={card.lastMessage}
+          isSelected={card.chatId === selectedChatId}
+          onSelect={handleSelectChatId}
+        />
+      ))}
     </aside>
   );
 };

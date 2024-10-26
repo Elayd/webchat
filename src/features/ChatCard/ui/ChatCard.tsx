@@ -13,7 +13,6 @@ interface IChatCard {
   onSelect: (id: string) => void;
 }
 
-// Поправить верстку
 export const ChatCard = (props: IChatCard) => {
   const { imgSrc, headerText, lastMessage, day, chatId, onSelect, isSelected } =
     props;
@@ -21,13 +20,15 @@ export const ChatCard = (props: IChatCard) => {
   return (
     <Link to={`${chatId}`} onClick={() => onSelect(chatId)}>
       <div
-        className={`w-full h-20 flex ${
+        className={`w-full h-20 flex items-center ${
           isSelected ? "bg-blue-500" : "bg-gray-800"
-        }`}
+        } border-b border-solid border-gray-500 `}
       >
         <CardAvatar imgSrc={imgSrc} />
-        <CardHeader headerText={headerText} day={day} />
-        <CardLastMessage lastMessage={lastMessage} />
+        <div className="flex-grow flex flex-col justify-between pl-2 pr-2">
+          <CardHeader headerText={headerText} day={day} />
+          <CardLastMessage lastMessage={lastMessage} />
+        </div>
       </div>
     </Link>
   );

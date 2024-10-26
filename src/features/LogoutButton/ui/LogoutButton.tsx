@@ -1,4 +1,4 @@
-import { Button } from "@/shared/ui/Button/button";
+import { Button } from "@/shared/ui/Button/Button";
 import useAuthStore, { setAuthSelector } from "@/app/store/AuthSlice/auth";
 
 export function LogoutButton() {
@@ -8,5 +8,9 @@ export function LogoutButton() {
     localStorage.removeItem("refreshToken");
     setAuth(false);
   };
-  return <Button onClick={handleLogout}>Logout</Button>;
+  return (
+    <Button size="sm" onClick={handleLogout}>
+      Logout
+    </Button>
+  );
 }

@@ -1,5 +1,5 @@
 import { UserField } from "@/shared/ui/UserField/UserField";
-import { Button } from "@/shared/ui/Button/button";
+import { Button } from "@/shared/ui/Button/Button";
 import { useCallback, useState } from "react";
 
 import { Link } from "react-router-dom";
@@ -31,7 +31,7 @@ const SettingsPage = () => {
           <Link to="/chat">
             <Button
               size="lg"
-              className=" bg-gray-700 border-b border-solid border-gray-500 mt-6 ml-6"
+              className="mt-6 ml-6"
               onClick={!editable ? changeMode : saveChanges}
             >
               Back
@@ -39,7 +39,7 @@ const SettingsPage = () => {
           </Link>
           <Button
             size="lg"
-            className=" bg-gray-700 border-b border-solid border-gray-500 mt-6 mr-6"
+            className="mt-6 mr-6"
             onClick={!editable ? changeMode : saveChanges}
           >
             {!editable ? "Edit" : "Save"}

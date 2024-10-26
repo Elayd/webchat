@@ -5,12 +5,8 @@ interface CardLastMessageProps {
 }
 export const CardLastMessage: FC<CardLastMessageProps> = ({ lastMessage }) => {
   return (
-    <div className="w-3/4 h-full border-b border-solid border-gray-500">
-      <div className="h-3/4 text-gray-400 flex items-center pr-1 pl-2">
-        <span className="overflow-hidden whitespace-nowrap text-ellipsis">
-          {lastMessage}
-        </span>
-      </div>
-    </div>
+    <span className="min-w-[240px] max-w-[240px] text-gray-400 text-sm h-10 truncate">
+      {lastMessage}
+    </span>
   );
 };

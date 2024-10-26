@@ -25,7 +25,7 @@ const InputField = <T extends FieldValues>({
     <label className="text-white">{label}:</label>
     <input
       type={type}
-      className="bg-gray-600 text-blue-500 w-full border-none outline-none p-2 rounded"
+      className="bg-gray-600 text-blue-500 w-full border-none outline-none p-2 rounded-xl"
       {...register(name)}
     />
     {error && (
