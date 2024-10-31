@@ -31,7 +31,7 @@ axiosInstance.interceptors.response.use(
 
     try {
       const { data: newAccess } = await axiosInstance.post<string>(
-        "/security/refresh",
+        "/v1/refresh",
         {
           refreshToken,
         }

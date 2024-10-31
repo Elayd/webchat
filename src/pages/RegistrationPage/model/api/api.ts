@@ -3,5 +3,5 @@ import { IUserRegData } from "../types/types";
 import { ITokenResponse } from "@/shared/types/tokens";
 
 export const signUpApi = async (data: IUserRegData) => {
-  return axiosInstance.post<ITokenResponse>("/security/signup", data);
+  return axiosInstance.post<ITokenResponse>("/v1/signup", data);
 };

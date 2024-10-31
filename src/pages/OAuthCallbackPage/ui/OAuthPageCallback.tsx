@@ -19,7 +19,7 @@ const OAuthPageCallback = () => {
     }
 
     axiosInstance
-      .get<ITokenResponse>(`/oauth/token${window.location.search}`)
+      .get<ITokenResponse>(`/v1/oauth/${window.location.search}`)
       .then((response) => {
         const tokens = response.data;
         const { accessToken, refreshToken } = tokens;

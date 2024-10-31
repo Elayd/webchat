@@ -11,7 +11,7 @@ export const logoutApi = async () => {
   }
 
   try {
-    const result = await axiosInstance.post("/security/logout", {
+    const result = await axiosInstance.post("/v1/logout", {
       refreshToken,
     });
 
