@@ -3,6 +3,7 @@ import { Button } from "@/shared/ui/Button/Button";
 import { useCallback, useState } from "react";
 
 import { Link } from "react-router-dom";
+import { LogoutFromAllOtherDevicesButton } from "@/features/LogoutFromAllOtherDevicesButton";
 
 // МБ распилю потом, щас рано на слои
 const SettingsPage = () => {
@@ -55,6 +56,7 @@ const SettingsPage = () => {
           />
           <UserField label="Email" value="test@gmail.com" editable={editable} />
         </div>
+        <LogoutFromAllOtherDevicesButton />
       </div>
     </div>
   );
