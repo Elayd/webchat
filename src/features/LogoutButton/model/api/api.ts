@@ -1,4 +1,5 @@
 import { axiosInstance } from "@/shared/api";
+import { captureException } from "@sentry/react";
 
 export const logoutApi = async () => {
   const refreshToken = localStorage.getItem("refreshToken");
@@ -6,7 +7,7 @@ export const logoutApi = async () => {
   localStorage.removeItem("refreshToken");
 
   if (!refreshToken) {
-    console.error("No refresh token");
+    captureException("No refreshToken token");
     return;
   }
 
@@ -17,6 +18,6 @@ export const logoutApi = async () => {
 
     return result;
   } catch (error) {
-    console.error(error, "error");
+    captureException(error);
   }
 };

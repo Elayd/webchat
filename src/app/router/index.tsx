@@ -9,8 +9,11 @@ import { ChatPage } from "@/pages/ChatPage";
 import { SettingsPage } from "@/pages/SettingsPage";
 import { RegistrationPage } from "@/pages/RegistrationPage";
 import OAuthPageCallback from "@/pages/OAuthCallbackPage/ui/OAuthPageCallback";
+import { wrapCreateBrowserRouter } from "@sentry/react";
 
-export const router = createBrowserRouter([
+const sentryCreateBrowserRouter = wrapCreateBrowserRouter(createBrowserRouter);
+
+export const router = sentryCreateBrowserRouter([
   {
     element: <ErrorBoundaryLayout />,
     children: [

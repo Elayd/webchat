@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/react";
 import axios, { AxiosResponse } from "axios";
 
 export const axiosInstance = axios.create({
@@ -40,7 +41,9 @@ axiosInstance.interceptors.response.use(
       originalRequest.headers["Authorization"] = `Bearer ${newAccess}`;
       return axiosInstance.request(originalRequest);
     } catch (refreshError) {
-      console.log(refreshError);
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("accessToken");
+      captureException(refreshError);
       return Promise.reject(error);
     }
   }

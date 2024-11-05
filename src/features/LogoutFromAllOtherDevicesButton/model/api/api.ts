@@ -1,10 +1,11 @@
 import { axiosInstance } from "@/shared/api";
+import { captureException } from "@sentry/react";
 
 export const logoutAllOtherDevicesLogout = async () => {
   const refreshToken = localStorage.getItem("refreshToken");
 
   if (!refreshToken) {
-    console.error("No refresh token");
+    captureException("No refresh token");
     return;
   }
 
@@ -15,6 +16,6 @@ export const logoutAllOtherDevicesLogout = async () => {
 
     return result;
   } catch (error) {
-    console.error(error, "error");
+    captureException(error);
   }
 };

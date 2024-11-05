@@ -6,6 +6,7 @@ import useAuthStore, {
   setAuthSelector,
 } from "@/app/store/AuthSlice/auth";
 import { ITokenResponse } from "@/shared/types/tokens";
+import { captureException } from "@sentry/react";
 
 const OAuthPageCallback = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const OAuthPageCallback = () => {
         navigate("/chat");
       })
       .catch((error) => {
-        console.log(error);
+        captureException(error);
       });
   }, [isAuth, navigate, setAuth]);
   return <></>;

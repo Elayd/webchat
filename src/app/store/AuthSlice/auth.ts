@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { fetchAuthStatus } from "./api/checkAuth";
+import { captureException } from "@sentry/react";
 
 interface AuthState {
   isAuth: boolean;
@@ -17,12 +18,12 @@ const useAuthStore = create<AuthState>((set) => ({
   checkAuth: async () => {
     try {
       const accessToken = localStorage.getItem("accessToken");
-      if (!accessToken) throw new Error("No access token found");
+      if (!accessToken) return;
       await fetchAuthStatus();
       set({ isAuth: true });
     } catch (error) {
       set({ isAuth: false });
-      console.error("Failed to fetch auth status", error);
+      captureException(error);
     } finally {
       set({ isLoading: false });
     }
