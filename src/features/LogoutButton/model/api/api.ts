@@ -5,7 +5,7 @@ export const logoutApi = async () => {
   const refreshToken = localStorage.getItem("refreshToken");
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
-  localStorage.removeItem("email");
+  localStorage.removeItem("userId");
 
   if (!refreshToken) {
     captureException("No refreshToken token");

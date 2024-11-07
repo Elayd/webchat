@@ -16,6 +16,7 @@ const useUserStore = create<UserState>((set) => ({
   isAuth: false,
   isLoading: true,
   user: {
+    userId: "",
     email: "",
     firstName: "",
     secondName: "",
@@ -29,9 +30,9 @@ const useUserStore = create<UserState>((set) => ({
     try {
       const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) return;
-      const email = localStorage.getItem("email");
-      if (!email) return;
-      const user = await getUserInfo(email);
+      const userId = localStorage.getItem("userId");
+      if (!userId) return;
+      const user = await getUserInfo(userId);
       set({ user });
       set({ isAuth: true });
     } catch (error) {

@@ -22,10 +22,10 @@ const OAuthPageCallback = () => {
     axiosInstance
       .get<ITokenResponse>(`/v1/oauth/${window.location.search}`)
       .then((response) => {
-        const { accessToken, refreshToken, email } = response.data;
+        const { accessToken, refreshToken, userId } = response.data;
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
-        localStorage.setItem("email", email);
+        localStorage.setItem("userId", userId);
       })
       .then(() => {
         return getUserInfo();

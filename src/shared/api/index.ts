@@ -31,19 +31,21 @@ axiosInstance.interceptors.response.use(
     }
 
     try {
-      const { data: newAccess } = await axiosInstance.post<string>(
-        "/v1/refresh",
-        {
-          refreshToken,
-        }
-      );
-      localStorage.setItem("accessToken", newAccess);
-      originalRequest.headers["Authorization"] = `Bearer ${newAccess}`;
+      const { data } = await axiosInstance.post<{
+        accessToken: string;
+        userId: string;
+      }>("/v1/refresh", {
+        refreshToken,
+      });
+
+      const { accessToken } = data;
+      localStorage.setItem("accessToken", accessToken);
+      originalRequest.headers["Authorization"] = `Bearer ${accessToken}`;
       return axiosInstance.request(originalRequest);
     } catch (refreshError) {
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("accessToken");
-      localStorage.removeItem("email");
+      localStorage.removeItem("userId");
       captureException(refreshError);
       return Promise.reject(error);
     }

@@ -12,11 +12,11 @@ export const useRegMutation = () => {
 
   return useMutation({
     mutationFn: (data: IUserRegData) => signUpApi(data).then((res) => res.data),
-    onSuccess: async (response, vars) => {
-      const { accessToken, refreshToken } = response;
+    onSuccess: async (response) => {
+      const { accessToken, refreshToken, userId } = response;
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
-      localStorage.setItem("email", vars.email);
+      localStorage.setItem("userId", userId);
       await getUserInfo();
       navigate("/chat");
     },
