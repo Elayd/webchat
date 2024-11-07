@@ -2,7 +2,9 @@ import { captureException } from "@sentry/react";
 import axios, { AxiosResponse } from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`,
+  baseURL: `${import.meta.env.VITE_API_BASE_URL}/api/${
+    import.meta.env.VITE_API_VERSION
+  }`,
   headers: {
     Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
   },
@@ -34,7 +36,7 @@ axiosInstance.interceptors.response.use(
       const { data } = await axiosInstance.post<{
         accessToken: string;
         userId: string;
-      }>("/v1/refresh", {
+      }>(`${import.meta.env.VITE_AUTH_SERVICE_PATH}/refresh`, {
         refreshToken,
       });
 

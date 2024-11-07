@@ -13,9 +13,12 @@ export const logoutApi = async () => {
   }
 
   try {
-    const result = await axiosInstance.post("/v1/logout", {
-      refreshToken,
-    });
+    const result = await axiosInstance.post(
+      `${import.meta.env.VITE_AUTH_SERVICE_PATH}/logout`,
+      {
+        refreshToken,
+      }
+    );
 
     return result;
   } catch (error) {

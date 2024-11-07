@@ -10,9 +10,12 @@ export const logoutAllOtherDevicesLogout = async () => {
   }
 
   try {
-    const result = await axiosInstance.post("/v1/logoutOtherDevices", {
-      refreshToken,
-    });
+    const result = await axiosInstance.post(
+      `${import.meta.env.VITE_AUTH_SERVICE_PATH}/logoutOtherDevices`,
+      {
+        refreshToken,
+      }
+    );
 
     return result;
   } catch (error) {

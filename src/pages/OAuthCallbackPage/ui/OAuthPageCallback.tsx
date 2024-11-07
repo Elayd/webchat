@@ -20,7 +20,11 @@ const OAuthPageCallback = () => {
     }
 
     axiosInstance
-      .get<ITokenResponse>(`/v1/oauth/${window.location.search}`)
+      .get<ITokenResponse>(
+        `${import.meta.env.VITE_AUTH_SERVICE_PATH}/oauth/${
+          window.location.search
+        }`
+      )
       .then((response) => {
         const { accessToken, refreshToken, userId } = response.data;
         localStorage.setItem("accessToken", accessToken);
