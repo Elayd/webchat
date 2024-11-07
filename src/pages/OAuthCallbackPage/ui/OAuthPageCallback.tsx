@@ -1,17 +1,17 @@
 import { axiosInstance } from "@/shared/api";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useAuthStore, {
+import useUserStore, {
+  getUserInfoSelector,
   isAuthSelector,
-  setAuthSelector,
-} from "@/app/store/AuthSlice/auth";
+} from "@/app/store/UserSlice/user";
 import { ITokenResponse } from "@/shared/types/tokens";
 import { captureException } from "@sentry/react";
 
 const OAuthPageCallback = () => {
   const navigate = useNavigate();
-  const setAuth = useAuthStore(setAuthSelector);
-  const isAuth = useAuthStore(isAuthSelector);
+  const getUserInfo = useUserStore(getUserInfoSelector);
+  const isAuth = useUserStore(isAuthSelector);
 
   useEffect(() => {
     if (isAuth) {
@@ -22,17 +22,21 @@ const OAuthPageCallback = () => {
     axiosInstance
       .get<ITokenResponse>(`/v1/oauth/${window.location.search}`)
       .then((response) => {
-        const tokens = response.data;
-        const { accessToken, refreshToken } = tokens;
+        const { accessToken, refreshToken, email } = response.data;
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
-        setAuth(true);
+        localStorage.setItem("email", email);
+      })
+      .then(() => {
+        return getUserInfo();
+      })
+      .then(() => {
         navigate("/chat");
       })
       .catch((error) => {
         captureException(error);
       });
-  }, [isAuth, navigate, setAuth]);
+  }, [isAuth, navigate, getUserInfo]);
   return <></>;
 };
 

@@ -43,6 +43,7 @@ axiosInstance.interceptors.response.use(
     } catch (refreshError) {
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("accessToken");
+      localStorage.removeItem("email");
       captureException(refreshError);
       return Promise.reject(error);
     }

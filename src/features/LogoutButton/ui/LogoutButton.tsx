@@ -1,9 +1,9 @@
 import { Button } from "@/shared/ui/Button/Button";
-import useAuthStore, { setAuthSelector } from "@/app/store/AuthSlice/auth";
+import useUserStore, { setAuthSelector } from "@/app/store/UserSlice/user";
 import { logoutApi } from "../model/api/api";
 
 export function LogoutButton() {
-  const setAuth = useAuthStore(setAuthSelector);
+  const setAuth = useUserStore(setAuthSelector);
   const handleLogout = async () => {
     await logoutApi();
     setAuth(false);
