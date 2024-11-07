@@ -1,62 +1,46 @@
-import { UserField } from "@/shared/ui/UserField/UserField";
-import { Button } from "@/shared/ui/Button/Button";
-import { useCallback, useState } from "react";
-
-import { Link } from "react-router-dom";
 import { LogoutFromAllOtherDevicesButton } from "@/features/LogoutFromAllOtherDevicesButton";
+import { UserForm } from "@/widgets/UserForm";
+import { UserDataSchema } from "../model/schema/schema";
+import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/Avatar/Avatar";
+import useUserStore, { userInfoSelector } from "@/app/store/UserSlice/user";
+import { Link } from "react-router-dom";
+import { Button } from "@/shared/ui/Button/Button";
 
-// МБ распилю потом, щас рано на слои
 const SettingsPage = () => {
-  const [editable, setEditable] = useState(false);
-  const changeMode = () => {
-    setEditable(true);
+  const handleSubmit = () => {
+    console.log("hello");
   };
 
-  const saveChanges = () => {
-    setEditable(false);
+  const user = useUserStore(userInfoSelector);
+  const defaultValues = {
+    firstName: user.firstName,
+    secondName: user.secondName,
   };
-
-  const handleInputRefCb = useCallback(
-    (node: HTMLInputElement | null) => {
-      if (node && editable) {
-        node.focus();
-      }
-    },
-    [editable]
-  );
 
   return (
-    <div className="h-full w-full bg-gray-800 flex justify-center">
-      <div className="h-3/4 w-2/6 mt-10 border-2 border-solid border-gray-500 rounded-3xl flex flex-col items-center">
-        <div className="w-full flex justify-between">
-          <Link to="/chat">
-            <Button
-              size="lg"
-              className="mt-6 ml-6"
-              onClick={!editable ? changeMode : saveChanges}
-            >
-              Back
-            </Button>
-          </Link>
-          <Button
-            size="lg"
-            className="mt-6 mr-6"
-            onClick={!editable ? changeMode : saveChanges}
-          >
-            {!editable ? "Edit" : "Save"}
-          </Button>
+    <div className="h-full w-full bg-gray-800 flex justify-center py-8 px-4">
+      <Link to="/chat">
+        <Button className="absolute top-4 left-4 px-4 py-2 ">BACK</Button>
+      </Link>
+
+      <div className="max-w-md w-full">
+        <div className="flex justify-center mb-6">
+          <Avatar className="w-24 h-24">
+            <AvatarImage src={user.picture} alt="@shadcn" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
         </div>
-        <h1 className="text-gray-400 flex mt-6 mb-6">Settings</h1>
-        <div className="w-3/6 h-44 flex items-center bg-gray-700 rounded-xl flex-col p-6">
-          <UserField
-            inputRef={handleInputRefCb}
-            label="Username"
-            value="@Dmitrii"
-            editable={editable}
-          />
-          <UserField label="Email" value="test@gmail.com" editable={editable} />
+
+        <UserForm
+          defaultValues={defaultValues}
+          onSubmit={handleSubmit}
+          validationSchema={UserDataSchema}
+          title="Settings"
+        />
+
+        <div className="mt-6 flex justify-center">
+          <LogoutFromAllOtherDevicesButton />
         </div>
-        <LogoutFromAllOtherDevicesButton />
       </div>
     </div>
   );

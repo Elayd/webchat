@@ -51,3 +51,4 @@ export const setAuthSelector = (state: UserState) => state.setAuth;
 export const isLoadingGetUserInfoSelector = (state: UserState) =>
   state.isLoading;
 export const getUserInfoSelector = (state: UserState) => state.getUserInfo;
+export const userInfoSelector = (state: UserState) => state.user;
