@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import "@/shared/styles/index.css";
+import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   createRoutesFromChildren,
@@ -8,9 +8,7 @@ import {
   useLocation,
   useNavigationType,
 } from "react-router-dom";
-import { router } from "./router/index.tsx";
-import { AuthWrapper } from "./AuthWrapper.tsx";
-
+import { router } from "@/router";
 import {
   init,
   browserTracingIntegration,
@@ -18,6 +16,7 @@ import {
   reactRouterV6BrowserTracingIntegration,
 } from "@sentry/react";
 import { useEffect } from "react";
+import {AuthWrapper} from "./AuthWrapper/AuthWrapper.tsx";
 
 init({
   dsn: import.meta.env.VITE_SENTRY_DSN,
