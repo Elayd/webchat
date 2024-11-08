@@ -1,10 +1,12 @@
-import { z } from "zod";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserData } from "../../../types/userData.ts";
-import { useEditableToggle } from "../../../hooks/useEditableToggle.tsx";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
 import InputField from "@/common/components/InputField/InputField.tsx";
 import {Button} from "@/common/ui/Button/Button.tsx";
+
+import { useEditableToggle } from "../../../hooks/useEditableToggle.tsx";
+import { UserData } from "../../../types/userData.ts";
 
 interface UserFormProps {
   title: string;

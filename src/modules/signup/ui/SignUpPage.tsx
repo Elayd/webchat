@@ -1,7 +1,8 @@
-import { useRegMutation } from "../query/useRegMutation.tsx";
-import { handleServerError } from "@/common/utils/errorCodesHandler.ts";
-import { UserRegistrationSchema } from "../schema/schema.ts";
 import { AuthForm } from "@/common/components/AuthForm";
+import { handleServerError } from "@/common/utils/errorCodesHandler.ts";
+
+import { useRegMutation } from "../query/useRegMutation.tsx";
+import { UserRegistrationSchema } from "../schema/schema.ts";
 
 const SignUpPage = () => {
   const { mutate: registration, error } = useRegMutation();

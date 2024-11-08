@@ -1,6 +1,7 @@
-import { IUserAuthData } from "../types/types.ts";
 import {axiosInstance} from "@/common/api";
 import {ITokenResponse} from "@/common/types/tokens.ts";
+
+import { IUserAuthData } from "../types/types.ts";
 
 export const signInApi = async (data: IUserAuthData) => {
   return axiosInstance.post<ITokenResponse>(

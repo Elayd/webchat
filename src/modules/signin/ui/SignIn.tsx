@@ -1,8 +1,9 @@
-import {useAuthMutation} from "../query/useAuthMutation.tsx";
-import {handleServerError} from "@/common/utils/errorCodesHandler.ts";
 import {AuthForm} from "@/common/components/AuthForm";
+import {handleServerError} from "@/common/utils/errorCodesHandler.ts";
 import {UserAuthSchema} from "@/modules/signin/schema/auth.ts";
+
 import {GoogleButton} from "../features/GoogleButton/GoogleButton.tsx";
+import {useAuthMutation} from "../query/useAuthMutation.tsx";
 
 const SignInPage = () => {
   const { mutate: authUser, error } = useAuthMutation();

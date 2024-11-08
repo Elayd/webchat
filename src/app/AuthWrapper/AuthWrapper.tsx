@@ -1,8 +1,9 @@
+import { useEffect } from "react";
+
 import useUserStore, {
   getUserInfoSelector,
   isLoadingGetUserInfoSelector,
 } from "@/common/store/UserSlice/user.ts";
-import { useEffect } from "react";
 
 export function AuthWrapper({ children }: { children: React.ReactNode }) {
   const isLoading = useUserStore(isLoadingGetUserInfoSelector);

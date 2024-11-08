@@ -1,5 +1,6 @@
-import { logoutAllOtherDevicesLogout } from "../api/api.ts";
 import {Button} from "@/common/ui/Button/Button.tsx";
+
+import { logoutAllOtherDevicesLogout } from "../api/api.ts";
 
 export function LogoutFromAllOtherDevicesButton() {
   const handleAllOtherDevicesLogout = async () => {

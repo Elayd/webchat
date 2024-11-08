@@ -1,13 +1,15 @@
+import { wrapCreateBrowserRouter } from "@sentry/react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
+
+import {ChatPage} from "@/modules/chat";
+import {OAuthPageCallbackPage} from "@/modules/googleOAuth";
+import {SettingsPage} from "@/modules/settings";
+import {SignInPage} from "@/modules/signin";
+import {SignUpPage} from "@/modules/signup";
+
+import { ErrorBoundaryLayout } from "./wrappers/ErrorBoundary/ErrorBoundaryWrapper.tsx";
 import { PrivateWrapper } from "./wrappers/PrivateWrapper/PrivateWrapper.tsx";
 import { PublicWrapper } from "./wrappers/PublicWrapper/PublicWrapper.tsx";
-import { ErrorBoundaryLayout } from "./wrappers/ErrorBoundary/ErrorBoundaryWrapper.tsx";
-import { wrapCreateBrowserRouter } from "@sentry/react";
-import {ChatPage} from "@/modules/chat";
-import {SettingsPage} from "@/modules/settings";
-import {SignUpPage} from "@/modules/signup";
-import {OAuthPageCallbackPage} from "@/modules/googleOAuth";
-import {SignInPage} from "@/modules/signin";
 
 
 const sentryCreateBrowserRouter = wrapCreateBrowserRouter(createBrowserRouter);

@@ -1,8 +1,10 @@
-import useUserStore, {getUserInfoSelector} from "@/common/store/UserSlice/user.ts";
-import {useNavigate} from "react-router-dom";
 import {useMutation} from "@tanstack/react-query";
-import {IUserRegData} from "../types/types.ts";
+import {useNavigate} from "react-router-dom";
+
+import useUserStore, {getUserInfoSelector} from "@/common/store/UserSlice/user.ts";
+
 import {signUpApi} from "../api/api.ts";
+import {IUserRegData} from "../types/types.ts";
 
 
 export const useRegMutation = () => {

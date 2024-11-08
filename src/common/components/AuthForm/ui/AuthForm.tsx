@@ -1,11 +1,12 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FC } from "react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { AuthData } from "../types/authData.ts";
-import { FC } from "react";
+
 import {Button} from "../../../ui/Button/Button.tsx";
 import InputField from "../../InputField/InputField.tsx";
+import { AuthData } from "../types/authData.ts";
 
 interface AuthFormProps {
   title: string;

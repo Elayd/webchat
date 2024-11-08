@@ -1,4 +1,5 @@
 import {captureException} from "@sentry/react";
+
 import {axiosInstance} from "@/common/api";
 
 export const logoutAllOtherDevicesLogout = async () => {

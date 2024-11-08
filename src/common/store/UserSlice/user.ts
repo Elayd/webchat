@@ -1,6 +1,8 @@
-import { create } from "zustand";
-import { getUserInfo } from "@/common/store/UserSlice/api/getUserInfo.ts";
 import { captureException } from "@sentry/react";
+import { create } from "zustand";
+
+import { getUserInfo } from "@/common/store/UserSlice/api/getUserInfo.ts";
+
 import {User} from '../../types/user.ts'
 
 interface UserState {

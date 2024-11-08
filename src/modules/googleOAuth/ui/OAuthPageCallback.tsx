@@ -1,7 +1,9 @@
-import {useNavigate} from "react-router-dom";
-import useUserStore, {getUserInfoSelector, isAuthSelector} from "@/common/store/UserSlice/user.ts";
-import {useEffect} from "react";
 import {captureException} from "@sentry/react";
+import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
+
+import useUserStore, {getUserInfoSelector, isAuthSelector} from "@/common/store/UserSlice/user.ts";
+
 import {exchangeTokenApi} from "../api/exchangeToken.ts";
 
 

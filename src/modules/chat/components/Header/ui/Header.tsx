@@ -1,6 +1,5 @@
-import {HeaderFinder} from "../../../features/HeaderFinder/index.ts";
-import {HeaderButtonsBlock} from "../../../features/HeaderButtonsBlock/index.ts";
-
+import { HeaderButtonsBlock } from "../../../features/HeaderButtonsBlock/index.ts";
+import { HeaderFinder } from "../../../features/HeaderFinder/index.ts";
 
 export const Header = () => {
   return (

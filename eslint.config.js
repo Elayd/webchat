@@ -4,6 +4,7 @@ import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 import pluginQuery from "@tanstack/eslint-plugin-query";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
 
 export default tseslint.config(
   { ignores: ["dist"] },
@@ -18,6 +19,7 @@ export default tseslint.config(
       "@tanstack/query": pluginQuery,
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
+      "simple-import-sort": simpleImportSort,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -30,6 +32,8 @@ export default tseslint.config(
       "@tanstack/query/stable-query-client": "error",
       "react-refresh/only-export-components": "off",
       "@typescript-eslint/no-empty-object-type": "off",
+      "simple-import-sort/imports": "error",
+      "simple-import-sort/exports": "error",
     },
   }
 );

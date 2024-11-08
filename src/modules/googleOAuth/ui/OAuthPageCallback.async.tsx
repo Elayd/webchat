@@ -1,6 +1,6 @@
-
 import { lazy, Suspense } from "react";
-import {Spinner} from "@/common/ui/Spinner/Spinner.tsx";
+
+import { Spinner } from "@/common/ui/Spinner/Spinner.tsx";
 
 const OAuthPageCallbackPage = lazy(() => import("./OAuthPageCallback.tsx"));
 

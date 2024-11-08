@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+
 import {Button} from "@/common/ui/Button/Button.tsx";
 
 export function GoogleButton() {

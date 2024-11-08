@@ -1,7 +1,8 @@
 import { Outlet, useLocation } from "react-router-dom";
-import {Header} from "../components/Header/index.ts";
-import {Sidebar} from "../components/Sidebar/index.ts";
-import {Footer} from "../components/Footer/index.ts";
+
+import { Footer } from "../components/Footer/index.ts";
+import { Header } from "../components/Header/index.ts";
+import { Sidebar } from "../components/Sidebar/index.ts";
 
 const Chat = () => {
   const location = useLocation();

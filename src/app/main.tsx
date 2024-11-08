@@ -1,6 +1,14 @@
-import { createRoot } from "react-dom/client";
 import "./index.css";
+
+import {
+  browserTracingIntegration,
+  init,
+  reactRouterV6BrowserTracingIntegration,
+  replayIntegration,
+} from "@sentry/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { createRoot } from "react-dom/client";
 import {
   createRoutesFromChildren,
   matchRoutes,
@@ -8,14 +16,9 @@ import {
   useLocation,
   useNavigationType,
 } from "react-router-dom";
+
 import { router } from "@/router";
-import {
-  init,
-  browserTracingIntegration,
-  replayIntegration,
-  reactRouterV6BrowserTracingIntegration,
-} from "@sentry/react";
-import { useEffect } from "react";
+
 import {AuthWrapper} from "./AuthWrapper/AuthWrapper.tsx";
 
 init({

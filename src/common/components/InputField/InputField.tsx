@@ -1,11 +1,12 @@
-import { Input } from "../../ui/Input/Input.tsx";
 import { memo } from "react";
 import {
   FieldError,
-  UseFormRegister,
   FieldValues,
   Path,
+  UseFormRegister,
 } from "react-hook-form";
+
+import { Input } from "../../ui/Input/Input.tsx";
 
 interface InputFieldProps<T extends FieldValues> {
   name: Path<T>;

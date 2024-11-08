@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+
 import {Spinner} from "@/common/ui/Spinner/Spinner.tsx";
 
 const SettingsPage = lazy(() => import("./SettingsPage.tsx"));

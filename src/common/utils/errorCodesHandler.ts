@@ -1,6 +1,6 @@
-import {ErrorCodes} from "../enums/errorCodes.ts";
-
 import { AxiosError } from "axios";
+
+import { ErrorCodes } from "../enums/errorCodes.ts";
 
 export const handleServerError = (error: unknown) => {
   if (error instanceof AxiosError) {

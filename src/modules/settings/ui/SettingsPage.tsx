@@ -1,10 +1,18 @@
-import useUserStore, {userInfoSelector} from "@/common/store/UserSlice/user.ts";
-import {Link} from "react-router-dom";
-import {Button} from "@/common/ui/Button/Button.tsx";
-import {Avatar, AvatarFallback, AvatarImage} from "@/common/ui/Avatar/Avatar.tsx";
-import {UserDataSchema} from "../schema/schema.ts";
-import {LogoutFromAllOtherDevicesButton} from "../features/LogoutFromAllOtherDevicesButton/index.ts";
-import {UserForm} from "../components/UserForm/index.ts";
+import { Link } from "react-router-dom";
+
+import useUserStore, {
+  userInfoSelector,
+} from "@/common/store/UserSlice/user.ts";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/common/ui/Avatar/Avatar.tsx";
+import { Button } from "@/common/ui/Button/Button.tsx";
+
+import { UserForm } from "../components/UserForm/index.ts";
+import { LogoutFromAllOtherDevicesButton } from "../features/LogoutFromAllOtherDevicesButton/index.ts";
+import { UserDataSchema } from "../schema/schema.ts";
 
 const SettingsPage = () => {
   const handleSubmit = () => {
