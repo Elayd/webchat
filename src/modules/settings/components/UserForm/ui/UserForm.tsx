@@ -1,9 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import InputField from "@/common/components/InputField/InputField.tsx";
-import {Button} from "@/common/ui/Button/Button.tsx";
+import { Button } from "@/common/ui/Button/Button.tsx";
 
 import { useEditableToggle } from "../../../hooks/useEditableToggle.tsx";
 import { UserData } from "../../../types/userData.ts";
@@ -24,21 +25,31 @@ export const UserForm: React.FC<UserFormProps> = ({
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<UserData>({
     resolver: zodResolver(validationSchema),
     mode: "all",
-    values: defaultValues,
   });
 
   const { toggleEditable, buttonText, editable } = useEditableToggle();
+
+  const handleFormSubmit = (data: UserData) => {
+    onSubmit(data);
+    toggleEditable();
+  };
+
+  useEffect(() => {
+    setValue("firstName", defaultValues.firstName);
+    setValue("secondName", defaultValues.secondName);
+  }, [defaultValues, setValue]);
 
   return (
     <div className="bg-gray-800 flex justify-center items-center py-4">
       <div className="w-full max-w-md p-6 bg-gray-700 rounded-3xl border-2 border-gray-500">
         <h1 className="text-gray-400 text-center text-2xl mb-6">{title}</h1>
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(handleFormSubmit)}
           className="flex flex-col space-y-4"
         >
           <InputField
@@ -59,11 +70,19 @@ export const UserForm: React.FC<UserFormProps> = ({
           />
           <Button
             size="lg"
-            type="submit"
             onClick={toggleEditable}
+            type="button"
             className="w-full rounded-xl transition-all duration-300 ease-in-out"
           >
             {buttonText}
+          </Button>
+          <Button
+            size="lg"
+            type="submit"
+            disabled={!editable}
+            className="w-full rounded-xl transition-all duration-300 ease-in-out"
+          >
+            CHANGE
           </Button>
         </form>
       </div>

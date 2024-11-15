@@ -1,7 +1,6 @@
 import { captureException } from "@sentry/react";
 import axios, { AxiosResponse } from "axios";
 
-console.log(import.meta.env.VITE_API_BASE_URL, 'A?')
 export const axiosInstance = axios.create({
   baseURL: `${import.meta.env.VITE_API_BASE_URL}/api/${
     import.meta.env.VITE_API_VERSION

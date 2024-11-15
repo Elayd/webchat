@@ -1,25 +1,24 @@
 import { Link } from "react-router-dom";
 
 import useUserStore, {
+  changeUserInfoSelector,
   userInfoSelector,
 } from "@/common/store/UserSlice/user.ts";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/common/ui/Avatar/Avatar.tsx";
 import { Button } from "@/common/ui/Button/Button.tsx";
 
 import { UserForm } from "../components/UserForm/index.ts";
+import { AvatarWithUpload } from "../features/AvatarWithUpload/ui/AvatarWithUpload.tsx";
 import { LogoutFromAllOtherDevicesButton } from "../features/LogoutFromAllOtherDevicesButton/index.ts";
 import { UserDataSchema } from "../schema/schema.ts";
 
 const SettingsPage = () => {
-  const handleSubmit = () => {
-    console.log("hello");
+  const changeUserInfo = useUserStore(changeUserInfoSelector);
+  const handleSubmit = (data: { firstName: string; secondName: string }) => {
+    changeUserInfo(data);
   };
 
   const user = useUserStore(userInfoSelector);
+
   const defaultValues = {
     firstName: user.firstName,
     secondName: user.secondName,
@@ -33,10 +32,12 @@ const SettingsPage = () => {
 
       <div className="max-w-md w-full">
         <div className="flex justify-center mb-6">
-          <Avatar className="w-24 h-24">
-            <AvatarImage src={user.picture} alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
+          <AvatarWithUpload
+            picture={user.picture}
+            userId={user.userId}
+            width={23}
+            height={23}
+          />
         </div>
 
         <UserForm
