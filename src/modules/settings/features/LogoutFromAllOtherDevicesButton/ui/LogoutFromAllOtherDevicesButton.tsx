@@ -1,15 +1,17 @@
-import {Button} from "@/common/ui/Button/Button.tsx";
+import { memo } from "react";
 
-import { logoutAllOtherDevicesLogout } from "../api/api.ts";
+import { Button } from "@/common/ui/Button/Button.tsx";
 
-export function LogoutFromAllOtherDevicesButton() {
-  const handleAllOtherDevicesLogout = async () => {
-    // Сделать квери и показывать сообщение
-    await logoutAllOtherDevicesLogout();
-  };
-  return (
-    <Button size="sm" onClick={handleAllOtherDevicesLogout}>
-      Logout from all other devices
-    </Button>
-  );
+interface LogoutFromAllOtherDevicesButtonProps {
+  handleLogout: () => void;
 }
+export const LogoutFromAllOtherDevicesButton = memo(
+  (props: LogoutFromAllOtherDevicesButtonProps) => {
+    const { handleLogout } = props;
+    return (
+      <Button size="sm" onClick={handleLogout}>
+        Logout from all other devices
+      </Button>
+    );
+  }
+);

@@ -4,7 +4,10 @@ import { create } from "zustand";
 import { getUserInfo } from "@/common/store/UserSlice/api/getUserInfo.ts";
 
 import { User } from "../../types/user.ts";
+import { changeUserAvatar } from "./api/changeUserAvatar.ts";
 import { changeUserInfo } from "./api/changeUserInfo.ts";
+import { getUploadAvatarLink } from "./api/getUploadAvatarLink.ts";
+import { uploadImageToS3 } from "./api/uploadImageToS3.ts";
 
 interface UserState {
   isAuth: boolean;
@@ -20,6 +23,8 @@ interface UserState {
     firstName: string;
     secondName: string;
   }) => Promise<void>;
+
+  changeUserAvatar: (file: File) => Promise<void>;
 }
 
 const useUserStore = create<UserState>((set, get) => ({
@@ -66,17 +71,41 @@ const useUserStore = create<UserState>((set, get) => ({
   getUserInfo: async () => {
     try {
       const accessToken = localStorage.getItem("accessToken");
-      if (!accessToken) return;
       const userId = localStorage.getItem("userId");
-      if (!userId) return;
+      if (!accessToken || !userId) return;
+
       const user = await getUserInfo(userId);
       set({ user });
+      // Убрать isAuth true
       set({ isAuth: true });
     } catch (error) {
       set({ isAuth: false });
       captureException(error);
     } finally {
       set({ isLoading: false });
+    }
+  },
+
+  changeUserAvatar: async (file) => {
+    const currentUser = get().user;
+
+    try {
+      const { data } = await getUploadAvatarLink(
+        currentUser.userId,
+        file?.type
+      );
+
+      const { url, key } = data;
+
+      await uploadImageToS3(url, file);
+
+      const avatarUrl = `${import.meta.env.VITE_S3_URL}/${key}`;
+
+      await changeUserAvatar(currentUser.userId, avatarUrl);
+    } catch (error) {
+      captureException(error);
+    } finally {
+      await get().getUserInfo();
     }
   },
 }));
@@ -91,3 +120,6 @@ export const getUserInfoSelector = (state: UserState) => state.getUserInfo;
 export const userInfoSelector = (state: UserState) => state.user;
 
 export const changeUserInfoSelector = (state: UserState) => state.changeUser;
+
+export const changeUserAvatarSelector = (state: UserState) =>
+  state.changeUserAvatar;

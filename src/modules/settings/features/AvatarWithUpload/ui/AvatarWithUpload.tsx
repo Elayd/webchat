@@ -1,51 +1,31 @@
-import axios from "axios";
+import { FC, memo } from "react";
 
 import { Avatar } from "@/common/components/Avatar/Avatar";
-
-import { changeUserAvatar } from "../api/changeUserAvatar";
-import { getUploadAvatarLink } from "../api/getUploadAvatarLink";
+import { cn } from "@/common/utils/cn";
 
 interface AvatarWithUploadProps {
-  userId: string;
-  width: number;
-  height: number;
   picture: string;
+  handleChangeAvatar: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
 }
 
-export function AvatarWithUpload(props: AvatarWithUploadProps) {
-  const { picture, userId, width, height } = props;
+export const AvatarWithUpload: FC<AvatarWithUploadProps> = memo(
+  ({ picture, handleChangeAvatar, className }) => {
+    return (
+      <>
+        <label className="cursor-pointer" htmlFor="avatar">
+          <Avatar picture={picture} className={cn(className)} />
+        </label>
 
-  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    const { data } = await getUploadAvatarLink(userId, file?.type);
-
-    const { url, key } = data;
-
-    await axios.put(url, file, {
-      headers: {
-        "Content-Type": file.type,
-      },
-    });
-
-    const avatarUrl = `${import.meta.env.VITE_S3_URL}/${key}`;
-    await changeUserAvatar(userId, avatarUrl);
-  };
-
-  return (
-    <>
-      <label className="cursor-pointer" htmlFor="avatar">
-        <Avatar picture={picture} width={width} height={height} />
-      </label>
-
-      <input
-        type="file"
-        onChange={handleChange}
-        id="avatar"
-        accept="image/*"
-        name="avatar"
-        className="hidden"
-      />
-    </>
-  );
-}
+        <input
+          type="file"
+          onChange={handleChangeAvatar}
+          id="avatar"
+          accept="image/*"
+          name="avatar"
+          className="hidden"
+        />
+      </>
+    );
+  }
+);
