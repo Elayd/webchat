@@ -21,7 +21,7 @@ export const AvatarWithUpload: FC<AvatarWithUploadProps> = memo(
           type="file"
           onChange={handleChangeAvatar}
           id="avatar"
-          accept="image/*"
+          accept="image/jpeg, image/png, image/webp, image/jpg"
           name="avatar"
           className="hidden"
         />
