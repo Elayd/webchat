@@ -1,3 +1,3 @@
-import { SignUpPageAsync } from "./ui/SignUpPage.async.tsx";
+import { SignUpPageAsync } from './ui/SignUpPage.async.tsx'
 
-export { SignUpPageAsync as SignUpPage };
+export { SignUpPageAsync as SignUpPage }

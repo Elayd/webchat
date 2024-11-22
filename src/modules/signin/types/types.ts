@@ -1,4 +1,4 @@
 export interface IUserAuthData {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }

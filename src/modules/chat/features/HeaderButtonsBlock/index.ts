@@ -1,1 +1,1 @@
-export { HeaderButtonsBlock } from "./ui/HeaderButtonsBlock.tsx";
+export { HeaderButtonsBlock } from './ui/HeaderButtonsBlock.tsx'

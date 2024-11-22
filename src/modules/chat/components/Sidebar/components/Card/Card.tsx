@@ -1,36 +1,35 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
-import { CardAvatar } from "./CardAvatar/index.ts";
-import { CardHeader } from "./CardHeader/index.ts";
-import { CardLastMessage } from "./CardLastMessage/index.ts";
+import { CardAvatar } from './CardAvatar/index.ts'
+import { CardHeader } from './CardHeader/index.ts'
+import { CardLastMessage } from './CardLastMessage/index.ts'
 
 interface IChatCard {
-  imgSrc: string;
-  headerText: string;
-  lastMessage: string;
-  day: string;
-  chatId: string;
-  isSelected: boolean;
-  onSelect: (id: string) => void;
+  imgSrc: string
+  headerText: string
+  lastMessage: string
+  day: string
+  chatId: string
+  isSelected: boolean
+  onSelect: (id: string) => void
 }
 
 export const ChatCard = (props: IChatCard) => {
-  const { imgSrc, headerText, lastMessage, day, chatId, onSelect, isSelected } =
-    props;
+  const { imgSrc, headerText, lastMessage, day, chatId, onSelect, isSelected } = props
 
   return (
     <Link to={`${chatId}`} onClick={() => onSelect(chatId)}>
       <div
         className={`w-full h-20 flex items-center ${
-          isSelected ? "bg-blue-500" : "bg-gray-800"
+          isSelected ? 'bg-blue-500' : 'bg-gray-800'
         } border-b border-solid border-gray-500 `}
       >
         <CardAvatar imgSrc={imgSrc} />
-        <div className="flex-grow flex flex-col justify-between pl-2 pr-2">
+        <div className='flex-grow flex flex-col justify-between pl-2 pr-2'>
           <CardHeader headerText={headerText} day={day} />
           <CardLastMessage lastMessage={lastMessage} />
         </div>
       </div>
     </Link>
-  );
-};
+  )
+}

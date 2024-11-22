@@ -1,1 +1,1 @@
-export { CardHeader } from "./ui/CardHeader.tsx";
+export { CardHeader } from './ui/CardHeader.tsx'

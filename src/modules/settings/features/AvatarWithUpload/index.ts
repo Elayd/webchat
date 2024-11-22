@@ -1,1 +1,1 @@
-export { AvatarWithUpload } from "./ui/AvatarWithUpload.tsx";
+export { AvatarWithUpload } from './ui/AvatarWithUpload.tsx'

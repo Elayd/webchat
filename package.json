@@ -10,7 +10,8 @@
     "lint:fix": "eslint . --fix",
     "test": "vitest",
     "preview": "vite preview",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint:prettier": "prettier --check \"**/*.*\""
   },
   "dependencies": {
     "-": "^0.0.1",
@@ -21,6 +22,8 @@
     "@sentry/vite-plugin": "^2.22.6",
     "@tanstack/eslint-plugin-query": "^5.56.1",
     "@tanstack/react-query": "^5.56.2",
+    "@typescript-eslint/eslint-plugin": "^8.14.0",
+    "@typescript-eslint/parser": "^8.14.0",
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -47,7 +50,9 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.20",
-    "eslint": "^9.9.0",
+    "eslint": "^9.14.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "eslint-plugin-simple-import-sort": "^12.1.1",
@@ -56,8 +61,9 @@
     "husky": "^9.1.6",
     "jsdom": "^25.0.1",
     "postcss": "^8.4.45",
+    "prettier": "3.3.3",
     "tailwindcss": "^3.4.10",
-    "typescript": "^5.5.3",
+    "typescript": "5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1",
     "vitest": "^2.1.4"

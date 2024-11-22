@@ -1,1 +1,1 @@
-export { CardLastMessage } from "./ui/CardLastMessage.tsx";
+export { CardLastMessage } from './ui/CardLastMessage.tsx'

@@ -1,19 +1,16 @@
-import { useEffect } from "react";
+import { useEffect } from 'react'
 
-import useUserStore, {
-  getUserInfoSelector,
-  isLoadingGetUserInfoSelector,
-} from "@/common/store/UserSlice/user.ts";
+import useUserStore, { getUserInfoSelector, isLoadingGetUserInfoSelector } from '@/common/store/UserSlice/user.ts'
 
 export function AuthWrapper({ children }: { children: React.ReactNode }) {
-  const isLoading = useUserStore(isLoadingGetUserInfoSelector);
-  const getUserInfo = useUserStore(getUserInfoSelector);
+  const isLoading = useUserStore(isLoadingGetUserInfoSelector)
+  const getUserInfo = useUserStore(getUserInfoSelector)
 
   useEffect(() => {
-    getUserInfo();
-  }, [getUserInfo]);
+    getUserInfo()
+  }, [getUserInfo])
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading...</div>
 
-  return children;
+  return children
 }

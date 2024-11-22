@@ -1,19 +1,19 @@
-import { memo } from "react";
+import { memo } from 'react'
 
-import { Avatar as AvatarLib, AvatarImage } from "@/common/ui/Avatar/Avatar";
-import { cn } from "@/common/utils/cn";
+import { Avatar as AvatarLib, AvatarImage } from '@/common/ui/Avatar/Avatar'
+import { cn } from '@/common/utils/cn'
 
 interface AvatarProps {
-  picture: string;
-  className?: string;
+  picture: string
+  className?: string
 }
 
 export const Avatar = memo((props: AvatarProps) => {
-  const { picture, className } = props;
+  const { picture, className } = props
 
   return (
     <AvatarLib className={cn(className)}>
-      <AvatarImage src={picture} alt="avatar" />
+      <AvatarImage src={picture} alt='avatar' />
     </AvatarLib>
-  );
-});
+  )
+})

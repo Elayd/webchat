@@ -1,17 +1,15 @@
-import { memo } from "react";
+import { memo } from 'react'
 
-import { Button } from "@/common/ui/Button/Button.tsx";
+import { Button } from '@/common/ui/Button/Button.tsx'
 
 interface LogoutFromAllOtherDevicesButtonProps {
-  handleLogout: () => void;
+  handleLogout: () => void
 }
-export const LogoutFromAllOtherDevicesButton = memo(
-  (props: LogoutFromAllOtherDevicesButtonProps) => {
-    const { handleLogout } = props;
-    return (
-      <Button size="sm" onClick={handleLogout}>
-        Logout from all other devices
-      </Button>
-    );
-  }
-);
+export const LogoutFromAllOtherDevicesButton = memo((props: LogoutFromAllOtherDevicesButtonProps) => {
+  const { handleLogout } = props
+  return (
+    <Button size='sm' onClick={handleLogout}>
+      Logout from all other devices
+    </Button>
+  )
+})

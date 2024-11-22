@@ -1,3 +1,3 @@
-import { OAuthPageCallbackPageAsync } from "./ui/OAuthPageCallback.async";
+import { OAuthPageCallbackPageAsync } from './ui/OAuthPageCallback.async'
 
-export { OAuthPageCallbackPageAsync as OAuthPageCallbackPage };
+export { OAuthPageCallbackPageAsync as OAuthPageCallbackPage }

@@ -1,1 +1,1 @@
-export { LogoutFromAllOtherDevicesButton } from "./ui/LogoutFromAllOtherDevicesButton.tsx";
+export { LogoutFromAllOtherDevicesButton } from './ui/LogoutFromAllOtherDevicesButton.tsx'

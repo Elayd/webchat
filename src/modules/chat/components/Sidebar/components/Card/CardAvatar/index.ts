@@ -1,1 +1,1 @@
-export { CardAvatar } from "./ui/CardAvatar.tsx";
+export { CardAvatar } from './ui/CardAvatar.tsx'
