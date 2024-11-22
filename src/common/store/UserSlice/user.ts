@@ -11,10 +11,8 @@ import { getUploadAvatarLink } from "./api/getUploadAvatarLink.ts";
 import { uploadImageToS3 } from "./api/uploadImageToS3.ts";
 
 interface UserState {
-  isAuth: boolean;
   isLoading: boolean;
-  setAuth: (isAuth: boolean) => void;
-  user: User;
+  user: User | null;
   setIsLoading: (isLoading: boolean) => void;
   getUserInfo: () => Promise<void>;
   changeUser: ({
@@ -24,25 +22,18 @@ interface UserState {
     firstName: string;
     secondName: string;
   }) => Promise<void>;
-
+  userLogout: () => void;
   changeUserAvatar: (file: File) => Promise<void>;
 }
 
 const useUserStore = create<UserState>((set, get) => ({
-  isAuth: false,
   isLoading: true,
-  user: {
-    userId: "",
-    email: "",
-    firstName: "",
-    secondName: "",
-    fullName: "",
-    picture: "",
-  },
-  setAuth: (isAuth) => set({ isAuth }),
+  user: null,
   setIsLoading: (isLoading) => set({ isLoading }),
   changeUser: async ({ firstName, secondName }) => {
     const currentUser = get().user;
+    if (!currentUser) return;
+
     try {
       if (
         currentUser.firstName === firstName &&
@@ -79,10 +70,7 @@ const useUserStore = create<UserState>((set, get) => ({
 
       const user = await getUserInfo(userId);
       set({ user });
-      // Убрать isAuth true
-      set({ isAuth: true });
     } catch (error) {
-      set({ isAuth: false });
       captureException(error);
     } finally {
       set({ isLoading: false });
@@ -91,6 +79,7 @@ const useUserStore = create<UserState>((set, get) => ({
 
   changeUserAvatar: async (file) => {
     const currentUser = get().user;
+    if (!currentUser) return;
 
     try {
       const { data } = await getUploadAvatarLink(
@@ -113,12 +102,15 @@ const useUserStore = create<UserState>((set, get) => ({
       await get().getUserInfo();
     }
   },
+  userLogout: () => {
+    set({
+      user: null,
+    });
+  },
 }));
 
 export default useUserStore;
 
-export const isAuthSelector = (state: UserState) => state.isAuth;
-export const setAuthSelector = (state: UserState) => state.setAuth;
 export const isLoadingGetUserInfoSelector = (state: UserState) =>
   state.isLoading;
 export const getUserInfoSelector = (state: UserState) => state.getUserInfo;
@@ -128,3 +120,5 @@ export const changeUserInfoSelector = (state: UserState) => state.changeUser;
 
 export const changeUserAvatarSelector = (state: UserState) =>
   state.changeUserAvatar;
+
+export const userLogoutSelector = (state: UserState) => state.userLogout;

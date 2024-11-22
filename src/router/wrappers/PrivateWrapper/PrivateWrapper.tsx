@@ -1,9 +1,11 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-import useUserStore, {isAuthSelector} from "@/common/store/UserSlice/user.ts";
+import useUserStore, {
+  userInfoSelector,
+} from "@/common/store/UserSlice/user.ts";
 
 export const PrivateWrapper = () => {
-  const isAuth = useUserStore(isAuthSelector);
+  const user = useUserStore(userInfoSelector);
 
-  return isAuth ? <Outlet /> : <Navigate to="/auth" />;
+  return user ? <Outlet /> : <Navigate to="/auth" />;
 };

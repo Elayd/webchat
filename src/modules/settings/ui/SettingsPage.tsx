@@ -46,7 +46,6 @@ const SettingsPage = () => {
     secondName: user.secondName,
   };
 
-  // isPending isSuccess затычка для тостеров
   return (
     <div className="h-full w-full bg-gray-800 flex justify-center py-8 px-4">
       <Link to="/chat">

@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 import useUserStore, {
   getUserInfoSelector,
-  isAuthSelector,
+  userInfoSelector,
 } from "@/common/store/UserSlice/user.ts";
 
 import { exchangeTokenApi } from "../api/exchangeToken.ts";
@@ -13,10 +13,10 @@ import { exchangeTokenApi } from "../api/exchangeToken.ts";
 const OAuthPageCallback = () => {
   const navigate = useNavigate();
   const getUserInfo = useUserStore(getUserInfoSelector);
-  const isAuth = useUserStore(isAuthSelector);
+  const user = useUserStore(userInfoSelector);
 
   useEffect(() => {
-    if (isAuth) {
+    if (user) {
       navigate("/chat");
       return;
     }
@@ -47,7 +47,7 @@ const OAuthPageCallback = () => {
       .catch((error: unknown) => {
         captureException(error);
       });
-  }, [isAuth, navigate, getUserInfo]);
+  }, [user, navigate, getUserInfo]);
   return <></>;
 };
 

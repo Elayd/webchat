@@ -1,8 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-import useUserStore, { isAuthSelector } from "@/common/store/UserSlice/user.ts";
+import useUserStore, {
+  userInfoSelector,
+} from "@/common/store/UserSlice/user.ts";
 
 export const PublicWrapper = () => {
-  const isAuth = useUserStore(isAuthSelector);
-  return isAuth ? <Navigate to="/chat" /> : <Outlet />;
+  const user = useUserStore(userInfoSelector);
+  return user ? <Navigate to="/chat" /> : <Outlet />;
 };

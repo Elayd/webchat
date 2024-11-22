@@ -1,13 +1,15 @@
-import useUserStore, {setAuthSelector} from "@/common/store/UserSlice/user.ts";
-import {Button} from "@/common/ui/Button/Button.tsx";
+import useUserStore, {
+  userLogoutSelector,
+} from "@/common/store/UserSlice/user.ts";
+import { Button } from "@/common/ui/Button/Button.tsx";
 
 import { logoutApi } from "../api/api.ts";
 
 export function LogoutButton() {
-  const setAuth = useUserStore(setAuthSelector);
+  const userLogout = useUserStore(userLogoutSelector);
   const handleLogout = async () => {
     await logoutApi();
-    setAuth(false);
+    userLogout();
   };
   return (
     <Button size="sm" onClick={handleLogout}>
