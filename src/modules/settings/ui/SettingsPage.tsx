@@ -42,8 +42,8 @@ const SettingsPage = () => {
   }, [logoutAllOtherDevices]);
 
   const defaultValues = {
-    firstName: user.firstName,
-    secondName: user.secondName,
+    firstName: user?.firstName ?? "",
+    secondName: user?.secondName ?? "",
   };
 
   return (
@@ -55,7 +55,7 @@ const SettingsPage = () => {
       <div className="max-w-md w-full">
         <div className="flex justify-center mb-6">
           <AvatarWithUpload
-            picture={user.picture}
+            picture={user?.picture ?? ""}
             className="w-24 h-24"
             handleChangeAvatar={handleChangeAvatar}
           />
