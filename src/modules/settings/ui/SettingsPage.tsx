@@ -19,11 +19,7 @@ const SettingsPage = () => {
   const user = useUserStore(userInfoSelector);
   const changeUserAvatar = useUserStore(changeUserAvatarSelector);
 
-  const {
-    mutate: logoutAllOtherDevices,
-    isSuccess,
-    isPending,
-  } = useLogoutAllOtherDevicesMutation();
+  const { mutate: logoutAllOtherDevices } = useLogoutAllOtherDevicesMutation();
 
   const handleSubmit = useCallback(
     (data: { firstName: string; secondName: string }) => {
@@ -53,8 +49,6 @@ const SettingsPage = () => {
   // isPending isSuccess затычка для тостеров
   return (
     <div className="h-full w-full bg-gray-800 flex justify-center py-8 px-4">
-      {isPending && <div>Loading...</div>}
-      {isSuccess && <div>Success</div>}
       <Link to="/chat">
         <Button className="absolute top-4 left-4 px-4 py-2 ">BACK</Button>
       </Link>

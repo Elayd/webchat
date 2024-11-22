@@ -1,4 +1,5 @@
 import { captureException } from "@sentry/react";
+import { toast } from "react-toastify";
 import { create } from "zustand";
 
 import { getUserInfo } from "@/common/store/UserSlice/api/getUserInfo.ts";
@@ -59,7 +60,9 @@ const useUserStore = create<UserState>((set, get) => ({
       });
 
       await changeUserInfo(currentUser.userId, firstName, secondName);
+      toast.success("Successfully changed info");
     } catch (error) {
+      toast.error("Update info failed");
       set({
         user: currentUser,
       });
@@ -102,7 +105,9 @@ const useUserStore = create<UserState>((set, get) => ({
       const avatarUrl = `${import.meta.env.VITE_S3_URL}/${key}`;
 
       await changeUserAvatar(currentUser.userId, avatarUrl);
+      toast.success("Successfully changed avatar");
     } catch (error) {
+      toast.error("Upload failed");
       captureException(error);
     } finally {
       await get().getUserInfo();

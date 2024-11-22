@@ -1,4 +1,5 @@
 import "./index.css";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   browserTracingIntegration,
@@ -16,10 +17,11 @@ import {
   useLocation,
   useNavigationType,
 } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import { router } from "@/router";
 
-import {AuthWrapper} from "./AuthWrapper/AuthWrapper.tsx";
+import { AuthWrapper } from "./AuthWrapper/AuthWrapper.tsx";
 
 init({
   dsn: import.meta.env.VITE_SENTRY_DSN,
@@ -45,6 +47,7 @@ export const queryClient = new QueryClient();
 createRoot(document.getElementById("root")!).render(
   <QueryClientProvider client={queryClient}>
     <AuthWrapper>
+      <ToastContainer autoClose={1000} />
       <RouterProvider router={router} />
     </AuthWrapper>
   </QueryClientProvider>

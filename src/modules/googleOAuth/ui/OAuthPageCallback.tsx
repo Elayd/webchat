@@ -1,11 +1,14 @@
-import {captureException} from "@sentry/react";
-import {useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import { captureException } from "@sentry/react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-import useUserStore, {getUserInfoSelector, isAuthSelector} from "@/common/store/UserSlice/user.ts";
+import useUserStore, {
+  getUserInfoSelector,
+  isAuthSelector,
+} from "@/common/store/UserSlice/user.ts";
 
-import {exchangeTokenApi} from "../api/exchangeToken.ts";
-
+import { exchangeTokenApi } from "../api/exchangeToken.ts";
 
 const OAuthPageCallback = () => {
   const navigate = useNavigate();
@@ -18,16 +21,27 @@ const OAuthPageCallback = () => {
       return;
     }
 
-    exchangeTokenApi().then((response) => {
+    const id = toast.loading("Loading user info...", {
+      position: "top-center",
+    });
+    exchangeTokenApi()
+      .then((response) => {
         const { accessToken, refreshToken, userId } = response.data;
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         localStorage.setItem("userId", userId);
       })
       .then(() => {
-        return getUserInfo();
+        getUserInfo();
       })
       .then(() => {
+        toast.update(id, {
+          render: "Successfully logged in",
+          type: "success",
+          isLoading: false,
+          autoClose: 1000,
+          position: "top-center",
+        });
         navigate("/chat");
       })
       .catch((error: unknown) => {

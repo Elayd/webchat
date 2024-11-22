@@ -14,14 +14,14 @@ export const AvatarWithUpload: FC<AvatarWithUploadProps> = memo(
   ({ picture, handleChangeAvatar, className }) => {
     const [showDownloadIcon, setShowDownloadIcon] = useState(false);
 
-    const hasNoPicture = !picture;
+    const imageVisible = showDownloadIcon || !picture;
 
     const handleMouseOver = () => {
-      if (!hasNoPicture) setShowDownloadIcon(true);
+      if (picture) setShowDownloadIcon(true);
     };
 
     const handleMouseLeave = () => {
-      if (!hasNoPicture) setShowDownloadIcon(false);
+      if (picture) setShowDownloadIcon(false);
     };
 
     return (
@@ -32,15 +32,20 @@ export const AvatarWithUpload: FC<AvatarWithUploadProps> = memo(
           onMouseOver={handleMouseOver}
           onMouseLeave={handleMouseLeave}
         >
-          {(hasNoPicture || showDownloadIcon) && (
-            <div className="absolute z-10 flex items-center justify-center w-[100%] h-[100%] rounded-full bg-white shadow-lg opacity-20">
-              <img
-                src={downloadIcon}
-                alt="Download icon"
-                className="w-[60%] h-[60%]"
-              />
-            </div>
-          )}
+          <div
+            className={`absolute z-10 flex items-center justify-center w-[100%] h-[100%] rounded-full bg-white shadow-lg transition-opacity duration-300 ${
+              imageVisible ? "opacity-30" : "opacity-0"
+            }`}
+            style={{
+              visibility: imageVisible ? "visible" : "hidden",
+            }}
+          >
+            <img
+              src={downloadIcon}
+              alt="Download icon"
+              className="w-[60%] h-[60%]"
+            />
+          </div>
           <Avatar picture={picture} className={cn(className)} />
         </label>
 
