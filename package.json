@@ -10,8 +10,7 @@
     "lint:fix": "eslint . --fix",
     "test": "vitest",
     "preview": "vite preview",
-    "prepare": "husky",
-    "lint:prettier": "prettier --check \"**/*.*\""
+    "prepare": "husky"
   },
   "dependencies": {
     "-": "^0.0.1",
