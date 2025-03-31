@@ -1,12 +1,33 @@
-import path from "path";
-import react from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
+/// <reference types="vitest" />
+/// <reference types="vite/client" />
+import { sentryVitePlugin } from '@sentry/vite-plugin'
+import react from '@vitejs/plugin-react'
+import path from 'path'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    sentryVitePlugin({
+      org: 'elayd',
+      project: 'javascript-react'
+    })
+  ],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './setupTest.ts',
+    watch: false
+  },
+
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
+      '@': path.resolve(__dirname, './src')
+    }
   },
-});
+
+  build: {
+    sourcemap: true,
+    emptyOutDir: true
+  }
+})

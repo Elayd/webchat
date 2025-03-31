@@ -1,48 +1,60 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { wrapCreateBrowserRouter } from '@sentry/react'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
 
-import { AccessWrapper } from "./AccessWrapper";
-import { AuthPage } from "@/pages/auth/Auth";
-import { Chat } from "@/pages/chat/Chat";
-import { OAuthPageCallback } from "@/pages/oauthCallback/OAuthPageCallback";
-import { RegistrationPage } from "@/pages/registration/RegistrationPage";
-import { Settings } from "@/pages/settings/Settings";
+import { ChatPage } from '@/modules/chat'
+import { OAuthPageCallbackPage } from '@/modules/googleOAuth'
+import { SettingsPage } from '@/modules/settings'
+import { SignInPage } from '@/modules/signin'
+import { SignUpPage } from '@/modules/signup'
 
-export const router = createBrowserRouter([
+import { ErrorBoundaryLayout } from './wrappers/ErrorBoundary/ErrorBoundaryWrapper.tsx'
+import { PrivateWrapper } from './wrappers/PrivateWrapper/PrivateWrapper.tsx'
+import { PublicWrapper } from './wrappers/PublicWrapper/PublicWrapper.tsx'
+
+const sentryCreateBrowserRouter = wrapCreateBrowserRouter(createBrowserRouter)
+
+export const router = sentryCreateBrowserRouter([
   {
-    element: <AccessWrapper isPrivate />,
+    element: <ErrorBoundaryLayout />,
     children: [
       {
-        path: "/chat",
-        element: <Chat />,
+        element: <PrivateWrapper />,
         children: [
           {
-            path: ":id",
-            element: <div className="text-white">Test</div>,
+            path: '/chat',
+            element: <ChatPage />,
+            children: [
+              {
+                path: ':id',
+                element: <div className='text-white'>Test</div>
+              }
+            ]
           },
-        ],
+          {
+            path: '/settings',
+            element: <SettingsPage />
+          }
+        ]
       },
       {
-        path: "/settings",
-        element: <Settings />,
+        element: <PublicWrapper />,
+        children: [
+          {
+            path: '/registration',
+            element: <SignUpPage />
+          },
+          {
+            path: '/auth',
+            element: <SignInPage />
+          }
+        ]
       },
-    ],
-  },
-  {
-    element: <AccessWrapper />,
-    children: [
       {
-        path: "/registration",
-        element: <RegistrationPage />,
-      },
-      {
-        path: "/auth",
-        element: <AuthPage />,
-      },
-    ],
+        path: '/auth/callback',
+        element: <OAuthPageCallbackPage />
+      }
+    ]
   },
-  {
-    path: "/auth/callback",
-    element: <OAuthPageCallback />,
-  },
-  { path: "*", element: <Navigate to="/chat" /> },
-]);
+
+  { path: '*', element: <Navigate to='/chat' /> }
+])
